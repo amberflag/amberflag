@@ -12,7 +12,7 @@ export async function login(formData: FormData) {
   // in practice, you should validate your inputs
   const data = {
     email: formData.get('email') as string,
-    password: formData.get('password') as string,
+    password: formData.get('password') as string
   }
 
   const { error } = await supabase.auth.signInWithPassword(data)
@@ -32,7 +32,7 @@ export async function signup(formData: FormData) {
   // in practice, you should validate your inputs
   const data = {
     email: formData.get('email') as string,
-    password: formData.get('password') as string,
+    password: formData.get('password') as string
   }
 
   const { error } = await supabase.auth.signUp(data)
