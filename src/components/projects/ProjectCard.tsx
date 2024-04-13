@@ -25,7 +25,6 @@ export const ProjectCard = ({
       <Card
         key={key}
         sx={{
-          cursor: 'pointer',
           borderRadius: '10px',
           backgroundColor: project?.isActivated ? 'white' : '#e6e6e6a2'
         }}

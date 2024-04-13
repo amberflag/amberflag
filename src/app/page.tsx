@@ -13,7 +13,10 @@ export default async function Home() {
 
   return (
     <main>
-      <Dashboard user={data?.user} projects={projectData.data} />
+      <Dashboard
+        user={data?.user}
+        projects={projectData?.data?.sort((a, b) => a.id - b.id)}
+      />
     </main>
   )
 }
