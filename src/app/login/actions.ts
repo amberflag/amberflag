@@ -1,46 +1,30 @@
 'use server'
-
-import { revalidatePath } from 'next/cache'
 import { redirect } from 'next/navigation'
 
 import { createClient } from '@/utils/supabase/server'
 
-export async function login(formData: FormData) {
+export async function loginWithSSO(
+  provider: 'github' | 'gitlab' | 'bitbucket'
+) {
   const supabase = createClient()
 
-  // type-casting here for convenience
-  // in practice, you should validate your inputs
-  const data = {
-    email: formData.get('email') as string,
-    password: formData.get('password') as string
-  }
-
-  const { error } = await supabase.auth.signInWithPassword(data)
+  const { error, data } = await supabase.auth.signInWithOAuth({
+    provider,
+    options: {
+      redirectTo: `${process.env.NEXT_PUBLIC_HOST_URL}/auth/callback`
+    }
+  })
+  console.log('error', error, data)
 
   if (error) {
     redirect('/error')
   }
 
-  revalidatePath('/', 'layout')
-  redirect('/')
+  return redirect(data.url)
 }
 
-export async function signup(formData: FormData) {
+export async function signOut() {
   const supabase = createClient()
-
-  // type-casting here for convenience
-  // in practice, you should validate your inputs
-  const data = {
-    email: formData.get('email') as string,
-    password: formData.get('password') as string
-  }
-
-  const { error } = await supabase.auth.signUp(data)
-
-  if (error) {
-    redirect('/error')
-  }
-
-  revalidatePath('/', 'layout')
-  redirect('/')
+  await supabase.auth.signOut()
+  redirect('/login')
 }
