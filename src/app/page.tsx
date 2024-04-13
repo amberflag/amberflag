@@ -5,8 +5,7 @@ import { Dashboard } from './dashboard'
 export default async function Home() {
   const supabase = createClient()
   const { data, error } = await supabase.auth.getUser()
-
-  console.log('kkkkk', data)
+  const projectData = await supabase.from('projects').select('*')
 
   if (error || !data?.user) {
     redirect('/login')
@@ -14,7 +13,7 @@ export default async function Home() {
 
   return (
     <main>
-      <Dashboard />
+      <Dashboard user={data?.user} projects={projectData.data} />
     </main>
   )
 }

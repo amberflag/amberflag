@@ -1,7 +1,5 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
-// import './globals.css'
-// import '@fontsource-variable/lexend'
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v13-appRouter'
 import theme from '@/theme'
 import { ThemeProvider } from '@mui/material/styles'

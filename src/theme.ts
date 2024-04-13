@@ -11,6 +11,14 @@ const lexend = Lexend({
 const theme = createTheme({
   typography: {
     fontFamily: lexend.style.fontFamily
+  },
+  palette: {
+    primary: {
+      main: '#373e41'
+    },
+    secondary: {
+      main: '#F9F6EE'
+    }
   }
 })
 
