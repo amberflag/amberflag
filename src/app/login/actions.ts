@@ -14,17 +14,15 @@ export async function loginWithSSO(
       redirectTo: `${process.env.NEXT_PUBLIC_HOST_URL}/auth/callback`
     }
   })
-  console.log('error', error, data)
 
   if (error) {
     redirect('/error')
   }
 
-  return redirect(data.url)
+  redirect(data.url)
 }
 
 export async function signOut() {
   const supabase = createClient()
   await supabase.auth.signOut()
-  redirect('/login')
 }
