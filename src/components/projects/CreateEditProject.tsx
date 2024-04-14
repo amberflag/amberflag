@@ -11,51 +11,42 @@ import React from 'react'
 import { EmojiSelector } from '../EmojiSelector'
 import { createClient } from '@/utils/supabase/client'
 import { useRouter } from 'next/navigation'
+import { useCreateEditProjectContext } from '@/provider/CreateEditProject'
 
-export const CreateEditProject = ({
-  open,
-  setOpen,
-  title,
-  setNewProject,
-  newProject
-}: {
-  open: boolean
-  setOpen: (isOpen: boolean) => void
-  title: string
-  setNewProject?: (newProject: any | undefined) => void
-  newProject: any
-}) => {
+export const CreateEditProject = ({ title }: { title: string }) => {
   const router = useRouter()
   const supabaseClient = createClient()
+  const { project, setProject, openDialog, setOpenDialog } =
+    useCreateEditProjectContext()
 
   const handleClose = () => {
-    setOpen(false)
-    setNewProject?.(undefined)
+    setOpenDialog?.(false)
+    setProject?.(undefined)
   }
 
   const handlecreate = async () => {
-    const { error } = newProject.id ? await edit() : await create()
+    const { error } = project.id ? await edit() : await create()
     if (!error) {
-      setOpen(false)
-      setNewProject?.(undefined)
+      setOpenDialog(false)
+      setProject?.(undefined)
       router.refresh()
     }
   }
 
   const create = () => {
-    return supabaseClient.from('projects').insert([newProject])
+    return supabaseClient.from('projects').insert([project])
   }
 
   const edit = () => {
     return supabaseClient
       .from('projects')
-      .update([newProject])
-      .eq('id', newProject.id)
+      .update([project])
+      .eq('id', project.id)
   }
 
   return (
     <Dialog
-      open={open}
+      open={openDialog}
       onClose={handleClose}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
@@ -78,16 +69,16 @@ export const CreateEditProject = ({
             required
             sx={{ minWidth: '350px' }}
             onChange={event => {
-              setNewProject?.({ ...newProject, name: event.target.value })
+              setProject?.({ ...project, name: event.target.value })
             }}
-            value={newProject?.name}
+            value={project?.name}
           />
 
           <EmojiSelector
             selectEmoji={emoji => {
-              setNewProject?.({ ...newProject, emoji })
+              setProject?.({ ...project, emoji })
             }}
-            emojiDefault={newProject?.emoji}
+            emojiDefault={project?.emoji}
           />
         </DialogContentText>
       </DialogContent>
@@ -95,8 +86,8 @@ export const CreateEditProject = ({
         <Button onClick={handleClose} color="error" variant="contained">
           Discard
         </Button>
-        <Button onClick={handlecreate} autoFocus disabled={!newProject?.name}>
-          {newProject?.id ? 'Update' : 'Create'}
+        <Button onClick={handlecreate} autoFocus disabled={!project?.name}>
+          {project?.id ? 'Update' : 'Create'}
         </Button>
       </DialogActions>
     </Dialog>

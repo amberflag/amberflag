@@ -1,11 +1,14 @@
+import { useFeatureFlagsContext } from '@/provider/FeatureFlags'
 import { FeatureFlagCard } from './FeatureFlagCard'
 
 export const FeatureFlagList = ({
-  environments,
-  featureFlags,
+  // environments,
+  // featureFlags,
   setChangesFeatureFlags,
   changesFeaturesFlags
 }: any) => {
+  const { featureFlags } = useFeatureFlagsContext()
+
   return (
     <div
       style={{
@@ -14,10 +17,9 @@ export const FeatureFlagList = ({
         marginBottom: '1rem'
       }}
     >
-      {featureFlags.map((featureFlag: any, index: number) => (
+      {featureFlags?.map((featureFlag: any, index: number) => (
         <FeatureFlagCard
           featureFlag={featureFlag}
-          environments={environments}
           key={index}
           setChangesFeatureFlags={setChangesFeatureFlags}
           changesFeaturesFlags={changesFeaturesFlags}

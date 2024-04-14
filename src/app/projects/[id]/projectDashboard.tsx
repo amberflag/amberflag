@@ -18,64 +18,36 @@ import { CreateEditDialog } from '@/components/featureFlags/CreateEditDialog'
 import SearchIcon from '@mui/icons-material/Search'
 import InputAdornment from '@mui/material/InputAdornment'
 import { createClient } from '@/utils/supabase/client'
+import { useUserContext } from '@/provider/UserContext'
+import { CreateFlagsEnvsButtons } from '@/components/featureFlags/CreateFlagsEnvsButtons'
+import { useSelectedProjectContext } from '@/provider/SelectedProject'
+import { useFeatureFlagsContext } from '@/provider/FeatureFlags'
 
 export const ProjectDashboard = ({ project, user, featureFlags }: any) => {
   const router = useRouter()
   const supabaseClient = createClient()
-  const [entity, setEntity] = React.useState<any>(undefined)
-  const [openCreateEdit, setOpen] = React.useState(false)
+
   const [changesFeaturesFlags, setChangesFeatureFlags] = React.useState<any[]>(
     []
   )
   const showTableAndActions =
     !!featureFlags?.length && !!project?.environments?.length
 
-  const helpActions = (showButtons = false) => {
-    return (
-      <div
-        style={{
-          display: 'flex',
-          marginTop: !showButtons ? '1rem' : undefined,
-          gap: '10px',
-          alignItems: 'center'
-        }}
-      >
-        {(!project?.environments?.length || showButtons) && (
-          <Button
-            variant="outlined"
-            onClick={() => {
-              setOpen(true)
-              setEntity({
-                ...entity,
-                type: 'Environment',
-                referenceDB: 'environment',
-                environments: project.environments,
-                projectId: project.id
-              })
-            }}
-          >
-            Create Environemts
-          </Button>
-        )}
-        {(!featureFlags?.length || showButtons) && (
-          <Button
-            variant="outlined"
-            onClick={() => {
-              setOpen(true)
-              setEntity({
-                ...entity,
-                type: 'Feature flag',
-                referenceDB: 'featureflag',
-                projectId: project.id
-              })
-            }}
-          >
-            Create Feature Flags
-          </Button>
-        )}
-      </div>
-    )
-  }
+  const { setUser } = useUserContext()
+  const { setSelectedProject } = useSelectedProjectContext()
+  const { setFeatureFlags } = useFeatureFlagsContext()
+
+  React.useEffect(() => {
+    setUser?.(user)
+  }, [user])
+
+  React.useEffect(() => {
+    setSelectedProject?.(project)
+  }, [project])
+
+  React.useEffect(() => {
+    setFeatureFlags?.(featureFlags)
+  }, [featureFlags])
 
   const save = async () => {
     for (let change of changesFeaturesFlags) {
@@ -95,7 +67,7 @@ export const ProjectDashboard = ({ project, user, featureFlags }: any) => {
 
   return (
     <>
-      <AppBar user={user} />
+      <AppBar showBack subtitle="Feature flags" />
       <span
         style={{
           justifyContent: 'space-between',
@@ -106,13 +78,6 @@ export const ProjectDashboard = ({ project, user, featureFlags }: any) => {
         }}
       >
         <span style={{ display: 'flex', alignItems: 'center' }}>
-          <ArrowBackIcon
-            fontSize="large"
-            sx={{ marginRight: '1rem', cursor: 'pointer' }}
-            onClick={() => {
-              router.back()
-            }}
-          />
           <Typography variant="h3" sx={{ marginRight: '0.5rem' }}>
             {project.emoji}
           </Typography>
@@ -153,7 +118,7 @@ export const ProjectDashboard = ({ project, user, featureFlags }: any) => {
               }}
             >
               <Typography variant="h5">Feature flags</Typography>
-              {helpActions(true)}
+              <CreateFlagsEnvsButtons showButtons />
               <FormControl variant="outlined" size="small" sx={{ flex: 1 }}>
                 <InputLabel htmlFor="search-feature-flag">Search</InputLabel>
                 <OutlinedInput
@@ -168,8 +133,6 @@ export const ProjectDashboard = ({ project, user, featureFlags }: any) => {
               </FormControl>
             </div>
             <FeatureFlagList
-              environments={project?.environments}
-              featureFlags={featureFlags}
               setChangesFeatureFlags={setChangesFeatureFlags}
               changesFeaturesFlags={changesFeaturesFlags}
             />
@@ -178,18 +141,15 @@ export const ProjectDashboard = ({ project, user, featureFlags }: any) => {
         )}
         {!showTableAndActions && (
           <div style={{ marginTop: '2rem' }}>
-            <NotData title="Feature flags" showActions={helpActions()} />
+            <NotData
+              title="Feature flags"
+              showActions={<CreateFlagsEnvsButtons />}
+            />
           </div>
         )}
       </div>
 
-      <CreateEditDialog
-        open={openCreateEdit}
-        setOpen={setOpen}
-        newEntity={entity}
-        setNewEntity={setEntity}
-        title={entity?.type}
-      />
+      <CreateEditDialog />
     </>
   )
 }

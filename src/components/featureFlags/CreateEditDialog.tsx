@@ -11,75 +11,66 @@ import React from 'react'
 import { EmojiSelector } from '../EmojiSelector'
 import { createClient } from '@/utils/supabase/client'
 import { useRouter } from 'next/navigation'
+import { useCreateEditEnvironmentOrFlagContext } from '@/provider/CreateEditEnvironmentOrFlag'
+import { useSelectedProjectContext } from '@/provider/SelectedProject'
 
-export const CreateEditDialog = ({
-  open,
-  setOpen,
-  title,
-  setNewEntity,
-  newEntity
-}: {
-  open: boolean
-  setOpen: (isOpen: boolean) => void
-  title?: string
-  setNewEntity?: (entity: any | undefined) => void
-  newEntity: any
-}) => {
+export const CreateEditDialog = () => {
+  const { entity, setEntity, openDialog, setOpenDialog } =
+    useCreateEditEnvironmentOrFlagContext()
+  const { selectedProject } = useSelectedProjectContext()
+
   const router = useRouter()
   const supabaseClient = createClient()
 
   const handleClose = () => {
-    setOpen(false)
-    setNewEntity?.(undefined)
+    setOpenDialog?.(false)
+    setEntity?.(undefined)
   }
 
   const handlecreate = async () => {
-    const { error } = newEntity.id ? await edit() : await create()
+    const { error } = entity.id ? await edit() : await create()
     if (!error) {
-      setOpen(false)
-      setNewEntity?.(undefined)
+      setOpenDialog?.(false)
+      setEntity?.(undefined)
       router.refresh()
     }
   }
 
   const create = () => {
-    if (newEntity.referenceDB === 'environment') {
+    if (entity.referenceDB === 'environment') {
       return supabaseClient
         .from('projects')
         .update({
-          environments: newEntity?.environments?.length
-            ? [...newEntity?.environments, newEntity.name]
-            : [newEntity.name]
+          environments: entity?.environments?.length
+            ? [...entity?.environments, entity.name]
+            : [entity.name]
         })
-        .eq('id', newEntity.projectId)
+        .eq('id', selectedProject.id)
     }
     return supabaseClient.from('featureFlags').insert({
-      project_id: newEntity.projectId,
-      name: newEntity.name,
+      project_id: selectedProject.id,
+      name: entity.name,
       activated: []
     })
   }
 
   const edit = () => {
-    return supabaseClient
-      .from('projects')
-      .update([newEntity])
-      .eq('id', newEntity.id)
+    return supabaseClient.from('projects').update([entity]).eq('id', entity.id)
   }
 
   return (
     <Dialog
-      open={open}
+      open={openDialog}
       onClose={handleClose}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
-      {title && (
+      {entity?.type && (
         <DialogTitle
           id="alert-dialog-title"
           style={{ textTransform: 'uppercase' }}
         >
-          NEW {title}
+          NEW {entity?.type}
         </DialogTitle>
       )}
       <DialogContent>
@@ -94,9 +85,9 @@ export const CreateEditDialog = ({
             required
             sx={{ minWidth: '350px' }}
             onChange={event => {
-              setNewEntity?.({ ...newEntity, name: event.target.value })
+              setEntity?.({ ...entity, name: event.target.value })
             }}
-            value={newEntity?.name}
+            value={entity?.name}
           />
         </DialogContentText>
       </DialogContent>
@@ -104,8 +95,8 @@ export const CreateEditDialog = ({
         <Button onClick={handleClose} color="error" variant="contained">
           Discard
         </Button>
-        <Button onClick={handlecreate} autoFocus disabled={!newEntity?.name}>
-          {newEntity?.id ? 'Update' : 'Create'}
+        <Button onClick={handlecreate} autoFocus disabled={!entity?.name}>
+          {entity?.id ? 'Update' : 'Create'}
         </Button>
       </DialogActions>
     </Dialog>

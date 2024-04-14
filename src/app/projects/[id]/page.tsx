@@ -1,11 +1,11 @@
 import { redirect } from 'next/navigation'
 import { createClient } from '@/utils/supabase/server'
-import { NextApiRequest } from 'next'
 import { ProjectDashboard } from './projectDashboard'
 
 export default async function Projects({ params }: { params: { id: string } }) {
   const supabase = createClient()
   const { data, error } = await supabase.auth.getUser()
+
   if (error || !data?.user) {
     redirect('/login')
   }
@@ -27,6 +27,7 @@ export default async function Projects({ params }: { params: { id: string } }) {
     .from('featureFlags')
     .select('*')
     .eq('project_id', projectData.data?.id)
+    .order('created_at')
 
   return (
     <main>

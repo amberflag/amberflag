@@ -6,14 +6,16 @@ import {
   Switch
 } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import { useSelectedProjectContext } from '@/provider/SelectedProject'
 
 export const FeatureFlagCard = ({
-  environments,
   featureFlag,
   key,
   setChangesFeatureFlags,
   changesFeaturesFlags // = [{id: numero, environments}]
 }: any) => {
+  const { selectedProject } = useSelectedProjectContext()
+
   const isChecked = (environment: string) => {
     return featureFlag.activated.some(
       (environmentsActivated: string) => environment === environmentsActivated
@@ -76,23 +78,22 @@ export const FeatureFlagCard = ({
             gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr));'
           }}
         >
-          {environments.map((environment: string) => {
+          {selectedProject?.environments?.map((environment: string) => {
             return (
-              <span key={environment}>
-                <FormControlLabel
-                  value={environment}
-                  control={
-                    <Switch
-                      color="primary"
-                      defaultChecked={isChecked(environment)}
-                      onChange={changeFeatureFlag}
-                    />
-                  }
-                  label={environment}
-                  labelPlacement="start"
-                  sx={{ width: 'min-content' }}
-                />
-              </span>
+              <FormControlLabel
+                value={environment}
+                key={environment}
+                control={
+                  <Switch
+                    color="primary"
+                    defaultChecked={isChecked(environment)}
+                    onChange={changeFeatureFlag}
+                  />
+                }
+                label={environment}
+                labelPlacement="start"
+                sx={{ width: 'min-content' }}
+              />
             )
           })}
         </div>

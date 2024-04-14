@@ -4,6 +4,8 @@ import { CreateEntity } from '@/components/CreateEntity'
 import { NotData } from '@/components/NotData'
 import { CreateEditProject } from '@/components/projects/CreateEditProject'
 import { ListProjects } from '@/components/projects/ListProjects'
+import { useProjectsContext } from '@/provider/ProjectsContext'
+import { useUserContext } from '@/provider/UserContext'
 import React from 'react'
 
 export const Dashboard = ({
@@ -13,37 +15,32 @@ export const Dashboard = ({
   user: any
   projects?: any[] | null
 }) => {
-  const [isOpenEditCreateDialog, setOpenEditCreateDialog] =
-    React.useState(false)
-  const [newProject, setNewProject] = React.useState<any | undefined>()
+  const { setUser } = useUserContext()
+  const { setProjects } = useProjectsContext()
+
+  React.useEffect(() => {
+    setUser?.(user)
+  }, [user])
+
+  React.useEffect(() => {
+    setProjects?.(projects)
+  }, [projects])
 
   return (
     <>
-      <AppBar user={user} />
+      <AppBar />
       <div
         style={{
           marginTop: '1rem',
           paddingInline: '0.5rem'
         }}
       >
-        <CreateEntity title="project" setOpen={setOpenEditCreateDialog} />
+        <CreateEntity title="project" />
         {!projects && <NotData title="Projects" />}
-        {!!projects && (
-          <ListProjects
-            projects={projects}
-            setEditProject={setNewProject}
-            setOpen={setOpenEditCreateDialog}
-          />
-        )}
+        {!!projects && <ListProjects />}
       </div>
 
-      <CreateEditProject
-        setOpen={setOpenEditCreateDialog}
-        open={isOpenEditCreateDialog}
-        title="project"
-        newProject={newProject}
-        setNewProject={setNewProject}
-      />
+      <CreateEditProject title="project" />
     </>
   )
 }
