@@ -1,6 +1,12 @@
 import Typography from '@mui/material/Typography'
 
-export const NotData = ({ title }: { title: string }) => {
+export const NotData = ({
+  title,
+  showActions
+}: {
+  title: string
+  showActions?: React.ReactNode
+}) => {
   return (
     <div
       style={{
@@ -9,12 +15,14 @@ export const NotData = ({ title }: { title: string }) => {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: '5px'
+        borderRadius: '5px',
+        flexDirection: 'column'
       }}
     >
       <Typography variant="body2">
         There are not <span style={{ color: '#e5b700' }}>{title}</span> yet.
       </Typography>
+      {showActions && showActions}
     </div>
   )
 }
