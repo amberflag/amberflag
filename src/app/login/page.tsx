@@ -7,6 +7,9 @@ import CardHeader from '@mui/material/CardHeader'
 import CardActions from '@mui/material/CardActions'
 import CardContent from '@mui/material/CardContent'
 import Button from '@mui/material/Button'
+import { IoLogoGithub } from 'react-icons/io5'
+import { IoLogoGitlab } from 'react-icons/io5'
+import { IoLogoBitbucket } from 'react-icons/io5'
 
 export default function LoginPage() {
   return (
@@ -32,29 +35,68 @@ export default function LoginPage() {
         <Card sx={{ height: 'min-content' }}>
           <CardHeader title="Amber Flag" />
           <CardContent>The app to management of feature flags</CardContent>
-          <CardActions>
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              padding: '10px',
+              gap: '5px'
+            }}
+          >
             <Button
               onClick={() => {
                 loginWithSSO('github')
               }}
+              color="primary"
+              variant="contained"
+              sx={{
+                width: '100%'
+              }}
             >
+              <IoLogoGithub
+                style={{
+                  marginRight: '10px'
+                }}
+              />
               Continue with github
             </Button>
             <Button
               onClick={() => {
                 loginWithSSO('gitlab')
               }}
+              color="primary"
+              variant="contained"
+              sx={{
+                width: '100%'
+              }}
             >
+              <IoLogoGitlab
+                style={{
+                  marginRight: '10px'
+                }}
+              />
               Continue with gitlab
             </Button>
             <Button
               onClick={() => {
                 loginWithSSO('bitbucket')
               }}
+              color="primary"
+              variant="contained"
+              sx={{
+                width: '100%'
+              }}
             >
+              <IoLogoBitbucket
+                style={{
+                  marginRight: '10px'
+                }}
+              />
               Continue with bitbucket
             </Button>
-          </CardActions>
+          </div>
         </Card>
       </Container>
     </div>
