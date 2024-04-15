@@ -7,13 +7,12 @@ import {
 } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 import { useSelectedProjectContext } from '@/provider/SelectedProject'
+import { useChangesFeatureFlagsContext } from '@/provider/ChangesFeatureFlag'
+import styles from './featureFlags.module.css'
 
-export const FeatureFlagCard = ({
-  featureFlag,
-  key,
-  setChangesFeatureFlags,
-  changesFeaturesFlags // = [{id: numero, environments}]
-}: any) => {
+export const FeatureFlagCard = ({ featureFlag, key }: any) => {
+  const { setChangesFeatureFlags, changesFeaturesFlags } =
+    useChangesFeatureFlagsContext()
   const { selectedProject } = useSelectedProjectContext()
 
   const isChecked = (environment: string) => {
@@ -33,10 +32,10 @@ export const FeatureFlagCard = ({
 
   const changeFeatureFlag = (event: any) => {
     if (
-      changesFeaturesFlags.find((change: any) => change.id === featureFlag.id)
+      changesFeaturesFlags?.find((change: any) => change.id === featureFlag.id)
     ) {
       // ya ha habido un cambio
-      const indexFeature = changesFeaturesFlags.findIndex(
+      const indexFeature = changesFeaturesFlags?.findIndex(
         (change: any) => change.id === featureFlag.id
       )
       const newchangesFeaturesFlags = [...changesFeaturesFlags]
@@ -72,17 +71,12 @@ export const FeatureFlagCard = ({
         {featureFlag.name}
       </AccordionSummary>
       <AccordionDetails>
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr));'
-          }}
-        >
+        <div className={styles.environments}>
           {selectedProject?.environments?.map((environment: string) => {
             return (
               <FormControlLabel
                 value={environment}
-                key={environment}
+                key={`${environment}-${featureFlag.id}`}
                 control={
                   <Switch
                     color="primary"
@@ -92,7 +86,7 @@ export const FeatureFlagCard = ({
                 }
                 label={environment}
                 labelPlacement="start"
-                sx={{ width: 'min-content' }}
+                className={styles.switch}
               />
             )
           })}

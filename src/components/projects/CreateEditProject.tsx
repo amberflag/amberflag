@@ -12,12 +12,14 @@ import { EmojiSelector } from '../EmojiSelector'
 import { createClient } from '@/utils/supabase/client'
 import { useRouter } from 'next/navigation'
 import { useCreateEditProjectContext } from '@/provider/CreateEditProject'
+import { useUserContext } from '@/provider/UserContext'
 
 export const CreateEditProject = ({ title }: { title: string }) => {
   const router = useRouter()
   const supabaseClient = createClient()
   const { project, setProject, openDialog, setOpenDialog } =
     useCreateEditProjectContext()
+  const { user } = useUserContext()
 
   const handleClose = () => {
     setOpenDialog?.(false)
@@ -33,14 +35,32 @@ export const CreateEditProject = ({ title }: { title: string }) => {
     }
   }
 
-  const create = () => {
-    return supabaseClient.from('projects').insert([project])
+  const create = async () => {
+    const response = await supabaseClient
+      .from('projects')
+      .insert([project])
+      .select('id')
+      .single()
+    if (response?.data?.id) {
+      await supabaseClient.from('userProjects').insert([
+        {
+          project_id: response?.data?.id,
+          invited_email: user?.email,
+          user_id: user?.id,
+          isAdmin: true
+        }
+      ])
+    }
+    return response
   }
 
   const edit = () => {
+    const projectCopy = { ...project }
+    delete projectCopy.isAdmin
+
     return supabaseClient
       .from('projects')
-      .update([project])
+      .update([projectCopy])
       .eq('id', project.id)
   }
 

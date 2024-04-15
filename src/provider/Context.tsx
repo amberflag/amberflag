@@ -1,5 +1,6 @@
 'use client'
 
+import { ChangesFeatureFlagsProvider } from './ChangesFeatureFlag'
 import { CreateEditEnvironmentOrFlagProvider } from './CreateEditEnvironmentOrFlag'
 import { CreateEditProjectProvider } from './CreateEditProject'
 import { FeatureFlagsProvider } from './FeatureFlags'
@@ -14,7 +15,11 @@ export function ContextProvider({ children }: { children: React.ReactNode }) {
         <CreateEditProjectProvider>
           <CreateEditEnvironmentOrFlagProvider>
             <SelectedProjectProvider>
-              <FeatureFlagsProvider>{children}</FeatureFlagsProvider>
+              <FeatureFlagsProvider>
+                <ChangesFeatureFlagsProvider>
+                  {children}
+                </ChangesFeatureFlagsProvider>
+              </FeatureFlagsProvider>
             </SelectedProjectProvider>
           </CreateEditEnvironmentOrFlagProvider>
         </CreateEditProjectProvider>

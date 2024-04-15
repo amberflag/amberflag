@@ -1,0 +1,38 @@
+.presentation {
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  padding-inline: 1rem;
+  margin-top: 0.5rem;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+}
+.emoji {
+  margin-right: 0.5rem !important;
+}
+
+.actions {
+  display: flex;
+  gap: 5px;
+}
+
+.content {
+  padding-inline: 1rem;
+}
+
+.table {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+  align-items: center;
+}
+.search {
+  flex: 1;
+}
+
+.extra {
+  margin-top: 2rem;
+}

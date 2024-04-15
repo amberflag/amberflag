@@ -8,11 +8,11 @@ import {
   Button
 } from '@mui/material'
 import React from 'react'
-import { EmojiSelector } from '../EmojiSelector'
 import { createClient } from '@/utils/supabase/client'
 import { useRouter } from 'next/navigation'
 import { useCreateEditEnvironmentOrFlagContext } from '@/provider/CreateEditEnvironmentOrFlag'
 import { useSelectedProjectContext } from '@/provider/SelectedProject'
+import styles from './featureFlags.module.css'
 
 export const CreateEditDialog = () => {
   const { entity, setEntity, openDialog, setOpenDialog } =
@@ -66,24 +66,21 @@ export const CreateEditDialog = () => {
       aria-describedby="alert-dialog-description"
     >
       {entity?.type && (
-        <DialogTitle
-          id="alert-dialog-title"
-          style={{ textTransform: 'uppercase' }}
-        >
+        <DialogTitle id="alert-dialog-title" className={styles.title}>
           NEW {entity?.type}
         </DialogTitle>
       )}
       <DialogContent>
         <DialogContentText
           id="alert-dialog-description"
-          sx={{ paddingTop: '1rem' }}
+          className={styles.dialog}
         >
           <TextField
             id="outlined-basic"
             label="Select a Name"
             variant="outlined"
             required
-            sx={{ minWidth: '350px' }}
+            className={styles.field}
             onChange={event => {
               setEntity?.({ ...entity, name: event.target.value })
             }}

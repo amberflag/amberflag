@@ -1,8 +1,8 @@
 import { useProjectsContext } from '@/provider/ProjectsContext'
 import { ProjectCard } from './ProjectCard'
 import { useMemo } from 'react'
-import CircularProgress from '@mui/material/CircularProgress'
 import { useCreateEditProjectContext } from '@/provider/CreateEditProject'
+import { LoadingContent } from '../LoadingContent'
 
 export const ListProjects = () => {
   const { projects } = useProjectsContext()
@@ -21,18 +21,7 @@ export const ListProjects = () => {
           gap: '10px'
         }}
       >
-        {!projects.length && (
-          <div
-            style={{
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              height: '100%'
-            }}
-          >
-            <CircularProgress />
-          </div>
-        )}
+        {!projects.length && <LoadingContent />}
         {!!projects.length &&
           projects?.map((project: any) => (
             <ProjectCard

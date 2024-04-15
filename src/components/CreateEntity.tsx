@@ -15,8 +15,8 @@ export const CreateEntity = ({ title }: { title: string }) => {
         }}
       >
         <Button
-          variant="contained"
-          sx={{ paddingInline: '3rem' }}
+          variant="text"
+          sx={{ paddingInline: '3rem', textDecoration: 'underline' }}
           onClick={() => {
             setOpenDialog(true)
           }}

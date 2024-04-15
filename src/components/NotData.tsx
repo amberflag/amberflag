@@ -2,16 +2,18 @@ import Typography from '@mui/material/Typography'
 
 export const NotData = ({
   title,
-  showActions
+  showActions,
+  height
 }: {
   title: string
   showActions?: React.ReactNode
+  height?: string
 }) => {
   return (
     <div
       style={{
         backgroundColor: '#f0f0f0',
-        height: '80vh',
+        height: height || '80vh',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',

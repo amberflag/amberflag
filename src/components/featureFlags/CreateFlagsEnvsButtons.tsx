@@ -2,6 +2,7 @@ import { useCreateEditEnvironmentOrFlagContext } from '@/provider/CreateEditEnvi
 import { useFeatureFlagsContext } from '@/provider/FeatureFlags'
 import { useSelectedProjectContext } from '@/provider/SelectedProject'
 import { Button } from '@mui/material'
+import styles from './featureFlags.module.css'
 
 export const CreateFlagsEnvsButtons = ({ showButtons = false }) => {
   const { setEntity, setOpenDialog, entity } =
@@ -12,11 +13,9 @@ export const CreateFlagsEnvsButtons = ({ showButtons = false }) => {
   return (
     <div
       style={{
-        display: 'flex',
-        marginTop: !showButtons ? '1rem' : undefined,
-        gap: '10px',
-        alignItems: 'center'
+        marginTop: !showButtons ? '1rem' : undefined
       }}
+      className={styles.create}
     >
       {(!selectedProject?.environments?.length || showButtons) && (
         <Button

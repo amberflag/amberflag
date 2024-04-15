@@ -1,0 +1,51 @@
+.environments {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+}
+
+.switch {
+  width: min-content;
+}
+
+.list {
+  padding-inline: 0.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  max-height: 60vh;
+  overflow: auto;
+  padding-bottom: 5vh;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content: end;
+  position: absolute;
+  bottom: 0px;
+  width: 96vw;
+  padding: 1rem;
+  left: 0px;
+  background-color: white;
+}
+
+.create {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.dialog {
+  padding-top: 1rem;
+}
+
+.title {
+  text-transform: uppercase;
+}
+.field {
+  min-width: 350px;
+}
+
+.buttonTopActions {
+  text-decoration: underline;
+}

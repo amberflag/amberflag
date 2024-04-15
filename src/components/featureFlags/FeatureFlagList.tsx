@@ -1,30 +1,19 @@
 import { useFeatureFlagsContext } from '@/provider/FeatureFlags'
 import { FeatureFlagCard } from './FeatureFlagCard'
+import { LoadingContent } from '../LoadingContent'
+import styles from './featureFlags.module.css'
+import { NotData } from '../NotData'
 
-export const FeatureFlagList = ({
-  // environments,
-  // featureFlags,
-  setChangesFeatureFlags,
-  changesFeaturesFlags
-}: any) => {
+export const FeatureFlagList = () => {
   const { featureFlags } = useFeatureFlagsContext()
 
   return (
-    <div
-      style={{
-        paddingInline: '0.5rem',
-        marginTop: '1rem',
-        marginBottom: '1rem'
-      }}
-    >
-      {featureFlags?.map((featureFlag: any, index: number) => (
-        <FeatureFlagCard
-          featureFlag={featureFlag}
-          key={index}
-          setChangesFeatureFlags={setChangesFeatureFlags}
-          changesFeaturesFlags={changesFeaturesFlags}
-        />
-      ))}
+    <div className={styles.list}>
+      {!featureFlags.length && <NotData title="Feature flags" height="70vh" />}
+      {!!featureFlags.length &&
+        featureFlags?.map((featureFlag: any) => (
+          <FeatureFlagCard featureFlag={featureFlag} key={featureFlag.id} />
+        ))}
     </div>
   )
 }

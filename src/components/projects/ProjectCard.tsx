@@ -3,6 +3,9 @@ import { useRouter } from 'next/navigation'
 import { ConfirmationModal } from '../ConfirmationModal'
 import React from 'react'
 import { createClient } from '@/utils/supabase/client'
+import EditIcon from '@mui/icons-material/Edit'
+import DeleteIcon from '@mui/icons-material/Delete'
+import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight'
 
 export const ProjectCard = ({
   project,
@@ -50,30 +53,35 @@ export const ProjectCard = ({
                   onClick={() => {
                     router.push(`/projects/${project?.uuid}`)
                   }}
-                  color="primary"
-                  variant="contained"
-                  disabled={!project?.isActivated}
-                >
-                  Access
-                </Button>
-                <Button
                   variant="outlined"
-                  color="primary"
-                  onClick={() => {
-                    setOpen(true)
-                    setEditProject?.(project)
-                  }}
                   disabled={!project?.isActivated}
+                  sx={{ gap: '5px' }}
                 >
-                  Edit
+                  Feature flags
+                  <KeyboardDoubleArrowRightIcon />
                 </Button>
-                <Button
-                  variant="contained"
-                  color="error"
-                  onClick={() => setOpenModalDeleteId(project?.id)}
-                >
-                  Delete
-                </Button>
+                {project?.isAdmin && (
+                  <>
+                    <Button
+                      variant="outlined"
+                      color="primary"
+                      onClick={() => {
+                        setOpen(true)
+                        setEditProject?.(project)
+                      }}
+                      disabled={!project?.isActivated}
+                    >
+                      <EditIcon fontSize="small" />
+                    </Button>
+                    <Button
+                      variant="contained"
+                      color="error"
+                      onClick={() => setOpenModalDeleteId(project?.id)}
+                    >
+                      <DeleteIcon />
+                    </Button>
+                  </>
+                )}
               </>
             )}
             {!project?.isActivated && (
