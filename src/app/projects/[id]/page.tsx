@@ -23,6 +23,13 @@ export default async function Projects({ params }: { params: { id: string } }) {
     redirect('/')
   }
 
+  const userPermision = await supabase
+    .from('userProjects')
+    .select('isAdmin')
+    .eq('user_id', data.user?.id)
+    .eq('project_id', projectData.data.id)
+    .single()
+
   const featureFlags = await supabase
     .from('featureFlags')
     .select('*')
@@ -33,7 +40,7 @@ export default async function Projects({ params }: { params: { id: string } }) {
     <main>
       <ProjectDashboard
         user={data?.user}
-        project={projectData.data}
+        project={{ ...projectData.data, isAdmin: userPermision?.data?.isAdmin }}
         featureFlags={featureFlags.data}
       />
     </main>

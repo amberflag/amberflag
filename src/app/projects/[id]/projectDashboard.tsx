@@ -77,26 +77,28 @@ export const ProjectDashboard = ({ project, user, featureFlags }: any) => {
             </Typography>
             <Typography variant="h4">{project.name}</Typography>
           </span>
-          <span className={styles.actions}>
-            <Button
-              variant="text"
-              sx={{ textDecoration: 'underline' }}
-              onClick={() => {
-                setDrawer('users')
-              }}
-            >
-              Admin Users
-            </Button>
-            <Button
-              variant="text"
-              sx={{ textDecoration: 'underline' }}
-              onClick={() => {
-                setDrawer('integrations')
-              }}
-            >
-              Integrations
-            </Button>
-          </span>
+          {selectedProject.isAdmin && (
+            <span className={styles.actions}>
+              <Button
+                variant="text"
+                sx={{ textDecoration: 'underline' }}
+                onClick={() => {
+                  setDrawer('users')
+                }}
+              >
+                Admin Users
+              </Button>
+              <Button
+                variant="text"
+                sx={{ textDecoration: 'underline' }}
+                onClick={() => {
+                  setDrawer('integrations')
+                }}
+              >
+                Integrations
+              </Button>
+            </span>
+          )}
         </span>
         <div className={styles.content}>
           {showTableAndActions && (
@@ -126,7 +128,7 @@ export const ProjectDashboard = ({ project, user, featureFlags }: any) => {
                 </FormControl>
               </div>
               <FeatureFlagList />
-              <FeatureFlagActions />
+              {selectedProject.isAdmin && <FeatureFlagActions />}
             </>
           )}
           {!showTableAndActions && (

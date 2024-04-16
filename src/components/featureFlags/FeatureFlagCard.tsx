@@ -82,6 +82,7 @@ export const FeatureFlagCard = ({ featureFlag, key }: any) => {
                     color="primary"
                     defaultChecked={isChecked(environment)}
                     onChange={changeFeatureFlag}
+                    disabled={!selectedProject?.isAdmin}
                   />
                 }
                 label={environment}
