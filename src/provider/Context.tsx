@@ -7,6 +7,7 @@ import { FeatureFlagsProvider } from './FeatureFlags'
 import { ProjectsProvider } from './ProjectsContext'
 import { SelectedProjectProvider } from './SelectedProject'
 import { UserProvider } from './UserContext'
+import { UsersProjectProvider } from './UsersProject'
 
 export function ContextProvider({ children }: { children: React.ReactNode }) {
   return (
@@ -17,7 +18,7 @@ export function ContextProvider({ children }: { children: React.ReactNode }) {
             <SelectedProjectProvider>
               <FeatureFlagsProvider>
                 <ChangesFeatureFlagsProvider>
-                  {children}
+                  <UsersProjectProvider>{children}</UsersProjectProvider>
                 </ChangesFeatureFlagsProvider>
               </FeatureFlagsProvider>
             </SelectedProjectProvider>

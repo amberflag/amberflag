@@ -36,3 +36,8 @@
 .extra {
   margin-top: 2rem;
 }
+.drawerContent {
+  width: 50vw;
+  min-width: 400px;
+  padding: 1rem;
+}

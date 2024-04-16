@@ -1,0 +1,25 @@
+.invitation {
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+.projectTitle {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+}
+
+.cardContent {
+  display: flex;
+  justify-content: space-between;
+}
+
+.DialogContent {
+  padding: 1rem;
+  overflow: auto;
+  max-height: 300px;
+}

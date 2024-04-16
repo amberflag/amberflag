@@ -1,0 +1,17 @@
+.content {
+  padding: 1rem;
+  margin-top: 1rem;
+}
+.keyInputContent {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 2rem;
+}
+
+.keyInput {
+  flex: 1;
+}
+
+.integrationBox {
+  padding: 1rem;
+}

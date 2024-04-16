@@ -1,0 +1,8 @@
+{
+  "imports": {
+    "server": "https://deno.land/std@0.168.0/http/server.ts",
+    "renderEjs": "https://deno.land/x/dejs/mod.ts",
+    "supabase": "https://esm.sh/@supabase/supabase-js@2",
+    "html": "https://deno.land/x/html/mod.ts"
+  }
+}

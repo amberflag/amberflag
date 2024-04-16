@@ -1,0 +1,50 @@
+.containerList {
+  padding: 1rem;
+}
+.paperList {
+  height: 37vh;
+  padding: 1rem;
+}
+
+.paperContainer {
+  gap: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.invited {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  width: 100%;
+}
+
+.addUser {
+  margin-top: 1rem;
+  display: flex;
+  width: 100%;
+  gap: 5px;
+}
+
+.inputEmail {
+  flex: 1;
+}
+
+.emailCard {
+  padding: 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: space-between;
+}
+
+.titleCard {
+  display: flex;
+  gap: 3px;
+}
+
+.listContent {
+  height: 80vh;
+  overflow: scroll;
+}
