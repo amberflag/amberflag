@@ -37,10 +37,10 @@ export const Invitations = ({ children }: { children: React.ReactNode }) => {
   )
 
   useEffect(() => {
-    if (user.email) {
+    if (user?.email) {
       getInvitations()
     }
-  }, [getInvitations, user.email])
+  }, [getInvitations, user?.email])
 
   const accept = async (id: string) => {
     await supabaseClient
