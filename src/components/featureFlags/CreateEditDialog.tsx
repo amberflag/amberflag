@@ -10,12 +10,14 @@ import {
 import React from 'react'
 import { createClient } from '@/utils/supabase/client'
 import { useRouter } from 'next/navigation'
-import { useCreateEditEnvironmentOrFlagContext } from '@/provider/CreateEditEnvironmentOrFlag'
-import { useSelectedProjectContext } from '@/provider/SelectedProject'
 import styles from './featureFlags.module.css'
+import {
+  useCreateEditEnvironmentOrFlagContext,
+  useSelectedProjectContext
+} from '@/provider/Context'
 
 export const CreateEditDialog = () => {
-  const { entity, setEntity, openDialog, setOpenDialog } =
+  const { entity, setEntity, openDialogEntity, setOpenDialogEntity } =
     useCreateEditEnvironmentOrFlagContext()
   const { selectedProject } = useSelectedProjectContext()
 
@@ -23,14 +25,14 @@ export const CreateEditDialog = () => {
   const supabaseClient = createClient()
 
   const handleClose = () => {
-    setOpenDialog?.(false)
+    setOpenDialogEntity?.(false)
     setEntity?.(undefined)
   }
 
   const handlecreate = async () => {
     const { error } = entity.id ? await edit() : await create()
     if (!error) {
-      setOpenDialog?.(false)
+      setOpenDialogEntity?.(false)
       setEntity?.(undefined)
       router.refresh()
     }
@@ -60,7 +62,7 @@ export const CreateEditDialog = () => {
 
   return (
     <Dialog
-      open={openDialog}
+      open={openDialogEntity}
       onClose={handleClose}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"

@@ -18,14 +18,16 @@ import React from 'react'
 import { CreateEditDialog } from '@/components/featureFlags/CreateEditDialog'
 import SearchIcon from '@mui/icons-material/Search'
 import InputAdornment from '@mui/material/InputAdornment'
-import { useUserContext } from '@/provider/UserContext'
 import { CreateFlagsEnvsButtons } from '@/components/featureFlags/CreateFlagsEnvsButtons'
-import { useSelectedProjectContext } from '@/provider/SelectedProject'
-import { useFeatureFlagsContext } from '@/provider/FeatureFlags'
 import styles from './project.module.css'
 import { createClient } from '@/utils/supabase/client'
 import { UsersContent } from '@/components/users/UsersContent'
 import { IntegrationsContent } from '@/components/integrations/IntegrationsContent'
+import {
+  useUserContext,
+  useSelectedProjectContext,
+  useFeatureFlagsContext
+} from '@/provider/Context'
 
 export const ProjectDashboard = ({ project, user, featureFlags }: any) => {
   const { setUser } = useUserContext()

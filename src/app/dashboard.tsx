@@ -4,8 +4,7 @@ import { CreateEntity } from '@/components/CreateEntity'
 import { NotData } from '@/components/NotData'
 import { CreateEditProject } from '@/components/projects/CreateEditProject'
 import { ListProjects } from '@/components/projects/ListProjects'
-import { useProjectsContext } from '@/provider/ProjectsContext'
-import { useUserContext } from '@/provider/UserContext'
+import { useProjectsContext, useUserContext } from '@/provider/Context'
 import React from 'react'
 
 export const Dashboard = ({

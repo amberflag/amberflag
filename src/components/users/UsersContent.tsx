@@ -1,5 +1,3 @@
-import { useSelectedProjectContext } from '@/provider/SelectedProject'
-import { useUsersProjectContext } from '@/provider/UsersProject'
 import { LoadingContent } from '@/components/LoadingContent'
 import React from 'react'
 import { createClient } from '@/utils/supabase/client'
@@ -8,6 +6,10 @@ import { TextField, Button, CircularProgress } from '@mui/material'
 import styles from './users.module.css'
 import SendIcon from '@mui/icons-material/Send'
 import { useRouter } from 'next/navigation'
+import {
+  useSelectedProjectContext,
+  useUsersProjectContext
+} from '@/provider/Context'
 
 export const UsersContent = () => {
   const { selectedProject } = useSelectedProjectContext()

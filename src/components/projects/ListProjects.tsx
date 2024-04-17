@@ -1,13 +1,16 @@
-import { useProjectsContext } from '@/provider/ProjectsContext'
 import { ProjectCard } from './ProjectCard'
 import { useMemo } from 'react'
-import { useCreateEditProjectContext } from '@/provider/CreateEditProject'
 import { LoadingContent } from '../LoadingContent'
+import {
+  useCreateEditProjectContext,
+  useProjectsContext
+} from '@/provider/Context'
 import styles from './projects.module.css'
 
 export const ListProjects = () => {
   const { projects } = useProjectsContext()
-  const { setProject, setOpenDialog } = useCreateEditProjectContext()
+  const { setProject, setOpenDialogCreateEditProject } =
+    useCreateEditProjectContext()
 
   const ListProjects = useMemo(
     () => (
@@ -19,12 +22,12 @@ export const ListProjects = () => {
               project={project}
               key={project.id}
               setEditProject={setProject}
-              setOpen={setOpenDialog}
+              setOpen={setOpenDialogCreateEditProject}
             />
           ))}
       </div>
     ),
-    [projects, setProject, setOpenDialog]
+    [projects, setProject, setOpenDialogCreateEditProject]
   )
 
   return ListProjects

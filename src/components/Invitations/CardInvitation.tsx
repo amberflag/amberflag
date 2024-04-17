@@ -4,7 +4,6 @@ import { useEffect } from 'react'
 import { createClient } from '@/utils/supabase/client'
 import React from 'react'
 import { CircularProgress, Typography, Button } from '@mui/material'
-import { useUserContext } from '@/provider/UserContext'
 import { useRouter } from 'next/navigation'
 
 export const CardInvitation = ({ invitation, key, accept, decline }: any) => {

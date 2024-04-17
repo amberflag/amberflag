@@ -1,5 +1,4 @@
 import { signOut } from '@/app/login/actions'
-import { useUserContext } from '@/provider/UserContext'
 import {
   AppBar as AppBarMui,
   Avatar,
@@ -12,6 +11,7 @@ import { useRouter } from 'next/navigation'
 import { useMemo } from 'react'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
 import styles from './appBar.module.css'
+import { useUserContext } from '@/provider/Context'
 
 export const AppBar = ({
   showBack = false,
@@ -67,7 +67,7 @@ export const AppBar = ({
         </Toolbar>
       </AppBarMui>
     ),
-    [user, router, showBack]
+    [user, router, showBack, subtitle]
   )
   return Bar
 }

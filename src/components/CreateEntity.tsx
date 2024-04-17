@@ -1,10 +1,10 @@
-import { useCreateEditProjectContext } from '@/provider/CreateEditProject'
+import { useCreateEditProjectContext } from '@/provider/Context'
 import Button from '@mui/material/Button'
 import React from 'react'
 import styles from './createEntity.module.css'
 
 export const CreateEntity = ({ title }: { title: string }) => {
-  const { setOpenDialog } = useCreateEditProjectContext()
+  const { setOpenDialogEntity } = useCreateEditProjectContext()
   return (
     <>
       <div className={styles.createButtons}>
@@ -12,7 +12,7 @@ export const CreateEntity = ({ title }: { title: string }) => {
           className={styles.createButton}
           variant="text"
           onClick={() => {
-            setOpenDialog(true)
+            setOpenDialogEntity(true)
           }}
         >
           create {title}
