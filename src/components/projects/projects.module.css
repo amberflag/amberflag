@@ -1,0 +1,8 @@
+.actionsItem {
+  padding: 1rem;
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center;
+  width: 100%;
+  min-width: 120px;
+}

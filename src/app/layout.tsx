@@ -5,7 +5,7 @@ import theme from '@/theme'
 import { ThemeProvider } from '@mui/material/styles'
 import { ContextProvider } from '@/provider/Context'
 import { Invitations } from '@/components/Invitations/Invitations'
-
+import './layout.css'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {

@@ -1,4 +1,12 @@
-import { Card, CardContent, Typography, Button } from '@mui/material'
+import {
+  Card,
+  CardContent,
+  Typography,
+  Button,
+  IconButton,
+  Menu,
+  MenuItem
+} from '@mui/material'
 import { useRouter } from 'next/navigation'
 import { ConfirmationModal } from '../ConfirmationModal'
 import React from 'react'
@@ -6,6 +14,8 @@ import { createClient } from '@/utils/supabase/client'
 import EditIcon from '@mui/icons-material/Edit'
 import DeleteIcon from '@mui/icons-material/Delete'
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight'
+import MoreVertIcon from '@mui/icons-material/MoreVert'
+import styles from './projects.module.css'
 
 export const ProjectCard = ({
   project,
@@ -21,6 +31,16 @@ export const ProjectCard = ({
   const router = useRouter()
   const [openModalDeleteId, setOpenModalDeleteId] = React.useState('')
   const [openModalReactivateId, setOpenModalReactivateId] = React.useState('')
+
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
+  const openMenuAction = Boolean(anchorEl)
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget)
+  }
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+
   const supabaseClient = createClient()
 
   return (
@@ -61,26 +81,16 @@ export const ProjectCard = ({
                   <KeyboardDoubleArrowRightIcon />
                 </Button>
                 {project?.isAdmin && (
-                  <>
-                    <Button
-                      variant="outlined"
-                      color="primary"
-                      onClick={() => {
-                        setOpen(true)
-                        setEditProject?.(project)
-                      }}
-                      disabled={!project?.isActivated}
-                    >
-                      <EditIcon fontSize="small" />
-                    </Button>
-                    <Button
-                      variant="contained"
-                      color="error"
-                      onClick={() => setOpenModalDeleteId(project?.id)}
-                    >
-                      <DeleteIcon />
-                    </Button>
-                  </>
+                  <IconButton
+                    onClick={handleClick}
+                    aria-controls={
+                      openMenuAction ? 'actions-project-card' : undefined
+                    }
+                    aria-haspopup="true"
+                    aria-expanded={openMenuAction ? 'true' : undefined}
+                  >
+                    <MoreVertIcon />
+                  </IconButton>
                 )}
               </>
             )}
@@ -126,6 +136,37 @@ export const ProjectCard = ({
             })
         }}
       />
+      <Menu
+        id="actions-project-card"
+        open={openMenuAction}
+        onClose={handleClose}
+        anchorEl={anchorEl}
+      >
+        <MenuItem
+          className={styles.actionsItem}
+          onClick={() => {
+            handleClose()
+            setOpen(true)
+            setEditProject?.(project)
+          }}
+        >
+          <Typography>Edit</Typography>
+          <EditIcon fontSize="small" />
+        </MenuItem>
+        <MenuItem
+          color="error"
+          className={styles.actionsItem}
+          onClick={() => {
+            handleClose()
+            setOpenModalDeleteId(project?.id)
+          }}
+        >
+          <Typography variant="body1" color="error">
+            Delete
+          </Typography>{' '}
+          <DeleteIcon color="error" />
+        </MenuItem>
+      </Menu>
     </>
   )
 }
