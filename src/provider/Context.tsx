@@ -1,28 +1,63 @@
 'use client'
+import { FeatureFlags } from '@/interfaces/featureFlags'
+import { Project } from '@/interfaces/project'
+import { User } from '@/interfaces/user'
+import { UserProjects } from '@/interfaces/userProjects'
 import React, { createContext, useContext, useState } from 'react'
 
+export declare interface Entity {
+  id?: string
+  type: string
+  referenceDB: string
+  environments?: string[]
+  name?: string
+}
+
 const ContextChangesFeatureFlags = createContext<any>([])
-const ContextEditEnvironmentOrFlag = createContext<any>({})
-const ContextCreateEditProject = createContext<any>({})
-const ContextFeatureFlags = createContext<any>({})
-const ContextProjects = createContext<any>({})
-const ContextSelectedProject = createContext<any>({})
-const ContextUser = createContext<any>({})
-const ContextUsersProject = createContext<any>([])
+const ContextEditEnvironmentOrFlag = createContext<{
+  entity?: Entity
+  setEntity?: (entity: Entity) => void
+  openDialogEntity?: boolean
+  setOpenDialogEntity?: (open: boolean) => void
+}>({})
+const ContextCreateEditProject = createContext<{
+  project?: Project
+  setProject?: (p: Project) => void
+  openDialogCreateEditProject?: boolean
+  setOpenDialogCreateEditProject?: (open: boolean) => void
+}>({})
+const ContextFeatureFlags = createContext<{
+  featureFlags?: FeatureFlags[]
+  setFeatureFlags?: (f: FeatureFlags[]) => void
+}>({})
+const ContextProjects = createContext<{
+  setProjects?: (p: Project[]) => void
+  projects?: Project[]
+}>({})
+const ContextSelectedProject = createContext<{
+  selectedProject?: Project
+  setSelectedProject?: (p: Project) => void
+}>({})
+const ContextUser = createContext<{ user?: User; setUser?: (u: User) => void }>(
+  {}
+)
+const ContextUsersProject = createContext<{
+  usersProject?: UserProjects[]
+  setUsersProject?: (u: UserProjects[]) => void
+}>({})
 
 export function ContextProvider({ children }: { children: React.ReactNode }) {
   const [changesFeaturesFlags, setChangesFeatureFlags] = useState<any>([])
-  const [entity, setEntity] = useState<any>({})
+  const [entity, setEntity] = useState<Entity>()
   const [openDialogEntity, setOpenDialogEntity] = useState<boolean>(false)
-
-  const [project, setProject] = useState<any>({})
+  const [project, setProject] = useState<Project>()
   const [openDialogCreateEditProject, setOpenDialogCreateEditProject] =
     useState<boolean>(false)
-  const [featureFlags, setFeatureFlags] = useState<any>({})
-  const [projects, setProjects] = useState<any>({})
-  const [selectedProject, setSelectedProject] = useState<any>({})
-  const [user, setUser] = useState<any>({})
-  const [usersProject, setUsersProject] = useState<any>({})
+  const [featureFlags, setFeatureFlags] = useState<FeatureFlags[]>([])
+  const [projects, setProjects] = useState<Project[]>([])
+  const [selectedProject, setSelectedProject] = useState<Project>()
+  const [user, setUser] = useState<User>()
+  const [usersProject, setUsersProject] = useState<UserProjects[]>()
 
   return (
     <ContextChangesFeatureFlags.Provider

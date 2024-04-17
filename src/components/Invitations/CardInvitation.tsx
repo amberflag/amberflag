@@ -5,10 +5,21 @@ import { createClient } from '@/utils/supabase/client'
 import React from 'react'
 import { CircularProgress, Typography, Button } from '@mui/material'
 import { useRouter } from 'next/navigation'
+import { Project } from '@/interfaces/project'
 
-export const CardInvitation = ({ invitation, key, accept, decline }: any) => {
+export const CardInvitation = ({
+  invitation,
+  key,
+  accept,
+  decline
+}: {
+  invitation: any
+  key: string
+  accept: (id: string) => void
+  decline: (id: string) => void
+}) => {
   const [isLoading, setLoading] = React.useState(true)
-  const [project, setProject] = React.useState<any>(undefined)
+  const [project, setProject] = React.useState<Project>()
   const supabaseClient = createClient()
 
   useEffect(() => {
@@ -39,11 +50,11 @@ export const CardInvitation = ({ invitation, key, accept, decline }: any) => {
             <Button
               color="success"
               variant="contained"
-              onClick={() => accept(invitation.id)}
+              onClick={() => accept(invitation?.id)}
             >
               Accept
             </Button>
-            <Button color="error" onClick={() => decline(invitation.id)}>
+            <Button color="error" onClick={() => decline(invitation?.id)}>
               Decline
             </Button>
           </span>

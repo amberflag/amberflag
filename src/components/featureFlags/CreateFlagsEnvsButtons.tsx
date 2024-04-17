@@ -1,6 +1,7 @@
 import { Button } from '@mui/material'
 import styles from './featureFlags.module.css'
 import {
+  Entity,
   useCreateEditEnvironmentOrFlagContext,
   useFeatureFlagsContext,
   useSelectedProjectContext
@@ -24,28 +25,28 @@ export const CreateFlagsEnvsButtons = ({ showButtons = false }) => {
           <Button
             variant="outlined"
             onClick={() => {
-              setOpenDialogEntity(true)
-              setEntity({
+              setOpenDialogEntity?.(true)
+              setEntity?.({
                 ...entity,
                 type: 'Environment',
                 referenceDB: 'environment',
                 environments: selectedProject?.environments
-              })
+              } as Entity)
             }}
           >
             Create Environemts
           </Button>
         )}
-      {(!featureFlags?.length || showButtons) && selectedProject.isAdmin && (
+      {(!featureFlags?.length || showButtons) && selectedProject?.isAdmin && (
         <Button
           variant="outlined"
           onClick={() => {
-            setOpenDialogEntity(true)
-            setEntity({
+            setOpenDialogEntity?.(true)
+            setEntity?.({
               ...entity,
               type: 'Feature flag',
               referenceDB: 'featureflag'
-            })
+            } as Entity)
           }}
         >
           Create Feature Flags

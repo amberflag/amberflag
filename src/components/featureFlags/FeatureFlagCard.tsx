@@ -12,8 +12,15 @@ import {
   useChangesFeatureFlagsContext,
   useSelectedProjectContext
 } from '@/provider/Context'
+import { FeatureFlags } from '@/interfaces/featureFlags'
 
-export const FeatureFlagCard = ({ featureFlag, key }: any) => {
+export const FeatureFlagCard = ({
+  featureFlag,
+  key
+}: {
+  featureFlag: FeatureFlags
+  key: string
+}) => {
   const { setChangesFeatureFlags, changesFeaturesFlags } =
     useChangesFeatureFlagsContext()
   const { selectedProject } = useSelectedProjectContext()

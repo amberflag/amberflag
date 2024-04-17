@@ -12,7 +12,7 @@ export const CreateEntity = ({ title }: { title: string }) => {
           className={styles.createButton}
           variant="text"
           onClick={() => {
-            setOpenDialogCreateEditProject(true)
+            setOpenDialogCreateEditProject?.(true)
           }}
         >
           create {title}

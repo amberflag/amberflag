@@ -14,6 +14,7 @@ import { useRouter } from 'next/navigation'
 
 import styles from './projects.module.css'
 import { useCreateEditProjectContext, useUserContext } from '@/provider/Context'
+import { Project } from '@/interfaces/project'
 
 export const CreateEditProject = ({ title }: { title: string }) => {
   const router = useRouter()
@@ -28,14 +29,14 @@ export const CreateEditProject = ({ title }: { title: string }) => {
 
   const handleClose = () => {
     setOpenDialogCreateEditProject?.(false)
-    setProject?.(undefined)
+    setProject?.({} as Project)
   }
 
   const handlecreate = async () => {
-    const { error } = project.id ? await edit() : await create()
+    const { error } = project?.id ? await edit() : await create()
     if (!error) {
-      setOpenDialogCreateEditProject(false)
-      setProject?.(undefined)
+      setOpenDialogCreateEditProject?.(false)
+      setProject?.({} as Project)
       router.refresh()
     }
   }
@@ -66,12 +67,12 @@ export const CreateEditProject = ({ title }: { title: string }) => {
     return supabaseClient
       .from('projects')
       .update([projectCopy])
-      .eq('id', project.id)
+      .eq('id', project?.id)
   }
 
   return (
     <Dialog
-      open={openDialogCreateEditProject}
+      open={!!openDialogCreateEditProject}
       onClose={handleClose}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
@@ -91,14 +92,14 @@ export const CreateEditProject = ({ title }: { title: string }) => {
             variant="outlined"
             required
             onChange={event => {
-              setProject?.({ ...project, name: event.target.value })
+              setProject?.({ ...project, name: event.target.value } as Project)
             }}
             value={project?.name}
           />
 
           <EmojiSelector
             selectEmoji={emoji => {
-              setProject?.({ ...project, emoji })
+              setProject?.({ ...project, emoji } as Project)
             }}
             emojiDefault={project?.emoji}
           />

@@ -12,6 +12,7 @@ import { createClient } from '@/utils/supabase/client'
 import { useRouter } from 'next/navigation'
 import styles from './featureFlags.module.css'
 import {
+  Entity,
   useCreateEditEnvironmentOrFlagContext,
   useSelectedProjectContext
 } from '@/provider/Context'
@@ -26,43 +27,43 @@ export const CreateEditDialog = () => {
 
   const handleClose = () => {
     setOpenDialogEntity?.(false)
-    setEntity?.(undefined)
+    setEntity?.({} as Entity)
   }
 
   const handlecreate = async () => {
-    const { error } = entity.id ? await edit() : await create()
+    const { error } = entity?.id ? await edit() : await create()
     if (!error) {
       setOpenDialogEntity?.(false)
-      setEntity?.(undefined)
+      setEntity?.({} as Entity)
       router.refresh()
     }
   }
 
   const create = () => {
-    if (entity.referenceDB === 'environment') {
+    if (entity?.referenceDB === 'environment') {
       return supabaseClient
         .from('projects')
         .update({
           environments: entity?.environments?.length
-            ? [...entity?.environments, entity.name]
-            : [entity.name]
+            ? [...entity?.environments, entity?.name]
+            : [entity?.name]
         })
-        .eq('id', selectedProject.id)
+        .eq('id', selectedProject?.id)
     }
     return supabaseClient.from('featureFlags').insert({
-      project_id: selectedProject.id,
-      name: entity.name,
+      project_id: selectedProject?.id,
+      name: entity?.name,
       activated: []
     })
   }
 
   const edit = () => {
-    return supabaseClient.from('projects').update([entity]).eq('id', entity.id)
+    return supabaseClient.from('projects').update([entity]).eq('id', entity?.id)
   }
 
   return (
     <Dialog
-      open={openDialogEntity}
+      open={!!openDialogEntity}
       onClose={handleClose}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
@@ -84,7 +85,7 @@ export const CreateEditDialog = () => {
             required
             className={styles.field}
             onChange={event => {
-              setEntity?.({ ...entity, name: event.target.value })
+              setEntity?.({ ...entity, name: event.target.value } as Entity)
             }}
             value={entity?.name}
           />

@@ -14,6 +14,7 @@ import { createClient } from '@/utils/supabase/client'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 import { useRouter } from 'next/navigation'
 import { useUsersProjectContext } from '@/provider/Context'
+import { UserProjects } from '@/interfaces/userProjects'
 
 export const UsersList = () => {
   const { usersProject } = useUsersProjectContext()
@@ -42,7 +43,7 @@ export const UsersList = () => {
       {!usersProject?.length && <NotData title="users" />}
       {usersProject?.length && (
         <List className={styles.listContent}>
-          {usersProject.map((user: any) => (
+          {usersProject.map((user: UserProjects) => (
             <ListItem key={user.id}>
               <Card className={styles.emailCard}>
                 <div className={styles.titleCard}>
@@ -58,7 +59,7 @@ export const UsersList = () => {
                         checked={user.isAdmin}
                         onChange={event => {
                           checkUncheckAdmin({
-                            id: user.id,
+                            id: user?.id?.toString() || '',
                             isChecked: event.target.checked
                           })
                         }}

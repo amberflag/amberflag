@@ -10,6 +10,7 @@ import {
   useSelectedProjectContext,
   useUsersProjectContext
 } from '@/provider/Context'
+import { UserProjects } from '@/interfaces/userProjects'
 
 export const UsersContent = () => {
   const { selectedProject } = useSelectedProjectContext()
@@ -27,15 +28,19 @@ export const UsersContent = () => {
       .select('*')
       .eq('project_id', selectedProject?.id)
       .order('id')
-      .then(response => {
-        setUsersProject(response.data)
+      .then((response: any) => {
+        setUsersProject?.(response.data)
         setLoading(false)
       })
   }, [selectedProject, supabaseClient, setUsersProject])
 
   const sendEmail = async () => {
     setLoadingEmailSent(true)
-    if (!usersProject.some((user: any) => user.invited_email === emailSent)) {
+    if (
+      !usersProject?.some(
+        (user: UserProjects) => user?.invited_email === emailSent
+      )
+    ) {
       await supabaseClient.from('userProjects').insert([
         {
           invited_email: emailSent,
@@ -65,7 +70,9 @@ export const UsersContent = () => {
           onClick={sendEmail}
           disabled={
             !emailSent ||
-            usersProject.some((user: any) => user.invited_email === emailSent)
+            usersProject?.some(
+              (user: UserProjects) => user?.invited_email === emailSent
+            )
           }
         >
           {loadingEmailSent ? <CircularProgress /> : <SendIcon />}

@@ -16,6 +16,7 @@ import DeleteIcon from '@mui/icons-material/Delete'
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 import styles from './projects.module.css'
+import { Project } from '@/interfaces/project'
 
 export const ProjectCard = ({
   project,
@@ -23,10 +24,10 @@ export const ProjectCard = ({
   setEditProject,
   setOpen
 }: {
-  project: any
+  project: Project
   key: string
-  setEditProject?: (project: any) => void
-  setOpen: (open: boolean) => void
+  setEditProject?: (project: Project) => void
+  setOpen?: (open: boolean) => void
 }) => {
   const router = useRouter()
   const [openModalDeleteId, setOpenModalDeleteId] = React.useState('')
@@ -46,7 +47,7 @@ export const ProjectCard = ({
   return (
     <>
       <Card
-        className={`${styles.card} ${project?.isCardActivated ? styles.cardActivated : styles.cardDeactivated}`}
+        className={`${styles.card} ${project?.isActivated ? styles.cardActivated : styles.cardDeactivated}`}
         key={key}
       >
         <CardContent className={styles.cardContent}>
@@ -89,7 +90,9 @@ export const ProjectCard = ({
               <Button
                 variant="contained"
                 color="secondary"
-                onClick={() => setOpenModalReactivateId(project?.id)}
+                onClick={() =>
+                  setOpenModalReactivateId(project?.id?.toString())
+                }
               >
                 Activated
               </Button>
@@ -137,7 +140,7 @@ export const ProjectCard = ({
           className={styles.actionsItem}
           onClick={() => {
             handleClose()
-            setOpen(true)
+            setOpen?.(true)
             setEditProject?.(project)
           }}
         >
@@ -149,7 +152,7 @@ export const ProjectCard = ({
           className={styles.actionsItem}
           onClick={() => {
             handleClose()
-            setOpenModalDeleteId(project?.id)
+            setOpenModalDeleteId(project?.id?.toString())
           }}
         >
           <Typography variant="body1" color="error">

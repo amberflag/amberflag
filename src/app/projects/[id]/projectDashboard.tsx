@@ -28,8 +28,19 @@ import {
   useSelectedProjectContext,
   useFeatureFlagsContext
 } from '@/provider/Context'
+import { Project } from '@/interfaces/project'
+import { User } from '@/interfaces/user'
+import { FeatureFlags } from '@/interfaces/featureFlags'
 
-export const ProjectDashboard = ({ project, user, featureFlags }: any) => {
+export const ProjectDashboard = ({
+  project,
+  user,
+  featureFlags
+}: {
+  project: Project
+  user: User
+  featureFlags: FeatureFlags[]
+}) => {
   const { setUser } = useUserContext()
   const { setSelectedProject, selectedProject } = useSelectedProjectContext()
   const { setFeatureFlags } = useFeatureFlagsContext()
@@ -63,7 +74,7 @@ export const ProjectDashboard = ({ project, user, featureFlags }: any) => {
       }
       await query
         .order('created_at')
-        .then((response: any) => setFeatureFlags(response.data))
+        .then((response: any) => setFeatureFlags?.(response.data))
     },
     [selectedProject, setFeatureFlags, supabaseClient]
   )
@@ -79,7 +90,7 @@ export const ProjectDashboard = ({ project, user, featureFlags }: any) => {
             </Typography>
             <Typography variant="h4">{project.name}</Typography>
           </span>
-          {selectedProject.isAdmin && (
+          {selectedProject?.isAdmin && (
             <span className={styles.actions}>
               <Button
                 variant="text"
@@ -130,7 +141,7 @@ export const ProjectDashboard = ({ project, user, featureFlags }: any) => {
                 </FormControl>
               </div>
               <FeatureFlagList />
-              {selectedProject.isAdmin && <FeatureFlagActions />}
+              {selectedProject?.isAdmin && <FeatureFlagActions />}
             </>
           )}
           {!showTableAndActions && (
@@ -138,7 +149,7 @@ export const ProjectDashboard = ({ project, user, featureFlags }: any) => {
               <NotData
                 title="Feature flags"
                 showActions={
-                  <>{selectedProject && <CreateFlagsEnvsButtons />}</>
+                  <>{selectedProject?.isAdmin && <CreateFlagsEnvsButtons />}</>
                 }
               />
             </div>

@@ -23,7 +23,7 @@ export const Invitations = ({ children }: { children: React.ReactNode }) => {
       supabaseClient
         .from('userProjects')
         .select('id,project_id')
-        .eq('invited_email', user.email)
+        .eq('invited_email', user?.email)
         .is('user_id', null)
         .then((response: any) => {
           if (response?.data?.length) {
@@ -33,7 +33,7 @@ export const Invitations = ({ children }: { children: React.ReactNode }) => {
             setOpen(false)
           }
         }),
-    [supabaseClient, user.email]
+    [supabaseClient, user?.email]
   )
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export const Invitations = ({ children }: { children: React.ReactNode }) => {
   const accept = async (id: string) => {
     await supabaseClient
       .from('userProjects')
-      .update({ user_id: user.id })
+      .update({ user_id: user?.id })
       .eq('id', id)
     await getInvitations()
     router.refresh()

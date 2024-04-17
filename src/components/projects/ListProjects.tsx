@@ -6,6 +6,7 @@ import {
   useProjectsContext
 } from '@/provider/Context'
 import styles from './projects.module.css'
+import { Project } from '@/interfaces/project'
 
 export const ListProjects = () => {
   const { projects } = useProjectsContext()
@@ -15,12 +16,12 @@ export const ListProjects = () => {
   const ListProjects = useMemo(
     () => (
       <div className={styles.listProjects}>
-        {!projects.length && <LoadingContent />}
-        {!!projects.length &&
-          projects?.map((project: any) => (
+        {!projects?.length && <LoadingContent />}
+        {!!projects?.length &&
+          projects?.map((project: Project) => (
             <ProjectCard
               project={project}
-              key={project.id}
+              key={project?.id?.toString()}
               setEditProject={setProject}
               setOpen={setOpenDialogCreateEditProject}
             />

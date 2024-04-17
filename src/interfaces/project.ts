@@ -6,8 +6,9 @@ export interface Project {
   isActivated: boolean
   uuid: string
   environments: string[]
-  integration_id: string
+  integration_key: string
   integration_token: string
+  isAdmin?: boolean
 }
 
 export interface CreateProject {

@@ -4,6 +4,8 @@ import { CreateEntity } from '@/components/CreateEntity'
 import { NotData } from '@/components/NotData'
 import { CreateEditProject } from '@/components/projects/CreateEditProject'
 import { ListProjects } from '@/components/projects/ListProjects'
+import { Project } from '@/interfaces/project'
+import { User } from '@/interfaces/user'
 import { useProjectsContext, useUserContext } from '@/provider/Context'
 import React from 'react'
 
@@ -11,8 +13,8 @@ export const Dashboard = ({
   user,
   projects
 }: {
-  user: any
-  projects?: any[] | null
+  user: User
+  projects?: Project[] | null
 }) => {
   const { setUser } = useUserContext()
   const { setProjects } = useProjectsContext()
@@ -22,7 +24,7 @@ export const Dashboard = ({
   }, [user])
 
   React.useEffect(() => {
-    setProjects?.(projects)
+    setProjects?.(projects || [])
   }, [projects])
 
   return (

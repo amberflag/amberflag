@@ -19,13 +19,13 @@ export const IntegrationsContent = () => {
         <TextField
           label="Integration Key"
           variant="outlined"
-          value={selectedProject.integration_key}
+          value={selectedProject?.integration_key || ''}
           className={styles.keyInput}
         />
         <Button
           variant="contained"
           color="primary"
-          onClick={() => handleClick(selectedProject.integration_key)}
+          onClick={() => handleClick(selectedProject?.integration_key || '')}
         >
           <Snackbar
             open={open}
@@ -40,13 +40,13 @@ export const IntegrationsContent = () => {
         <TextField
           label="Integration Token"
           variant="outlined"
-          value={selectedProject.integration_token}
+          value={selectedProject?.integration_token}
           className={styles.keyInput}
         />
         <Button
           variant="contained"
           color="primary"
-          onClick={() => handleClick(selectedProject.integration_token)}
+          onClick={() => handleClick(selectedProject?.integration_token || '')}
         >
           <Snackbar
             open={open}

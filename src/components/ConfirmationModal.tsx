@@ -20,7 +20,7 @@ export const ConfirmationModal = ({
   title: string
   open: boolean
   deny: () => void
-  accept: any
+  accept: () => void
 }) => {
   return (
     <Dialog
