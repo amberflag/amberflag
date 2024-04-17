@@ -41,7 +41,7 @@ export default async function Projects({ params }: { params: { id: string } }) {
       <ProjectDashboard
         user={data?.user}
         project={{ ...projectData.data, isAdmin: userPermision?.data?.isAdmin }}
-        featureFlags={featureFlags.data}
+        featureFlags={featureFlags.data || []}
       />
     </main>
   )
