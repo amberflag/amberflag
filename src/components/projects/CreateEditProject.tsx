@@ -11,25 +11,28 @@ import React from 'react'
 import { EmojiSelector } from '../EmojiSelector'
 import { createClient } from '@/utils/supabase/client'
 import { useRouter } from 'next/navigation'
-import { useCreateEditProjectContext } from '@/provider/CreateEditProject'
-import { useUserContext } from '@/provider/UserContext'
+import { useCreateEditProjectContext, useUserContext } from '@/provider/Context'
 
 export const CreateEditProject = ({ title }: { title: string }) => {
   const router = useRouter()
   const supabaseClient = createClient()
-  const { project, setProject, openDialog, setOpenDialog } =
-    useCreateEditProjectContext()
+  const {
+    project,
+    setProject,
+    openDialogCreateEditProject,
+    setOpenDialogCreateEditProject
+  } = useCreateEditProjectContext()
   const { user } = useUserContext()
 
   const handleClose = () => {
-    setOpenDialog?.(false)
+    setOpenDialogCreateEditProject?.(false)
     setProject?.(undefined)
   }
 
   const handlecreate = async () => {
     const { error } = project.id ? await edit() : await create()
     if (!error) {
-      setOpenDialog(false)
+      setOpenDialogCreateEditProject(false)
       setProject?.(undefined)
       router.refresh()
     }
@@ -66,7 +69,7 @@ export const CreateEditProject = ({ title }: { title: string }) => {
 
   return (
     <Dialog
-      open={openDialog}
+      open={openDialogCreateEditProject}
       onClose={handleClose}
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
@@ -106,7 +109,12 @@ export const CreateEditProject = ({ title }: { title: string }) => {
         <Button onClick={handleClose} color="error" variant="text">
           Discard
         </Button>
-        <Button onClick={handlecreate} autoFocus disabled={!project?.name} variant="contained">
+        <Button
+          onClick={handlecreate}
+          autoFocus
+          disabled={!project?.name}
+          variant="contained"
+        >
           {project?.id ? 'Update' : 'Create'}
         </Button>
       </DialogActions>

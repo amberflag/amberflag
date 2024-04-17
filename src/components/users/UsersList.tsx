@@ -1,4 +1,3 @@
-import { useUsersProjectContext } from '@/provider/UsersProject'
 import { NotData } from '../NotData'
 import styles from './users.module.css'
 import {
@@ -10,12 +9,11 @@ import {
   Switch,
   CircularProgress
 } from '@mui/material'
-import AddIcon from '@mui/icons-material/Add'
 import React, { useState } from 'react'
 import { createClient } from '@/utils/supabase/client'
-import { useSelectedProjectContext } from '@/provider/SelectedProject'
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'
 import { useRouter } from 'next/navigation'
+import { useUsersProjectContext } from '@/provider/Context'
 
 export const UsersList = () => {
   const { usersProject } = useUsersProjectContext()

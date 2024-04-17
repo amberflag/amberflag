@@ -1,11 +1,13 @@
-import { useCreateEditEnvironmentOrFlagContext } from '@/provider/CreateEditEnvironmentOrFlag'
-import { useFeatureFlagsContext } from '@/provider/FeatureFlags'
-import { useSelectedProjectContext } from '@/provider/SelectedProject'
 import { Button } from '@mui/material'
 import styles from './featureFlags.module.css'
+import {
+  useCreateEditEnvironmentOrFlagContext,
+  useFeatureFlagsContext,
+  useSelectedProjectContext
+} from '@/provider/Context'
 
 export const CreateFlagsEnvsButtons = ({ showButtons = false }) => {
-  const { setEntity, setOpenDialog, entity } =
+  const { setEntity, setOpenDialogEntity, entity } =
     useCreateEditEnvironmentOrFlagContext()
   const { selectedProject } = useSelectedProjectContext()
   const { featureFlags } = useFeatureFlagsContext()
@@ -21,7 +23,7 @@ export const CreateFlagsEnvsButtons = ({ showButtons = false }) => {
         <Button
           variant="outlined"
           onClick={() => {
-            setOpenDialog(true)
+            setOpenDialogEntity(true)
             setEntity({
               ...entity,
               type: 'Environment',
@@ -37,7 +39,7 @@ export const CreateFlagsEnvsButtons = ({ showButtons = false }) => {
         <Button
           variant="outlined"
           onClick={() => {
-            setOpenDialog(true)
+            setOpenDialogEntity(true)
             setEntity({
               ...entity,
               type: 'Feature flag',

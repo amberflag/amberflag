@@ -1,11 +1,11 @@
 'use client'
-import { useUserContext } from '@/provider/UserContext'
 import { createClient } from '@/utils/supabase/client'
 import { Dialog, DialogTitle } from '@mui/material'
 import React, { useCallback, useEffect } from 'react'
 import { CardInvitation } from './CardInvitation'
 import styles from './invitations.module.css'
 import { useRouter } from 'next/navigation'
+import { useUserContext } from '@/provider/Context'
 
 export const Invitations = ({ children }: { children: React.ReactNode }) => {
   const [open, setOpen] = React.useState(false)

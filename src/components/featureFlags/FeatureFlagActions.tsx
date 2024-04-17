@@ -1,9 +1,11 @@
-import { useChangesFeatureFlagsContext } from '@/provider/ChangesFeatureFlag'
 import { createClient } from '@/utils/supabase/client'
 import Button from '@mui/material/Button'
 import { useRouter } from 'next/navigation'
 import styles from './featureFlags.module.css'
-import { useFeatureFlagsContext } from '@/provider/FeatureFlags'
+import {
+  useChangesFeatureFlagsContext,
+  useFeatureFlagsContext
+} from '@/provider/Context'
 
 export const FeatureFlagActions = () => {
   const router = useRouter()

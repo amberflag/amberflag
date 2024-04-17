@@ -6,9 +6,12 @@ import {
   Switch
 } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
-import { useSelectedProjectContext } from '@/provider/SelectedProject'
-import { useChangesFeatureFlagsContext } from '@/provider/ChangesFeatureFlag'
+
 import styles from './featureFlags.module.css'
+import {
+  useChangesFeatureFlagsContext,
+  useSelectedProjectContext
+} from '@/provider/Context'
 
 export const FeatureFlagCard = ({ featureFlag, key }: any) => {
   const { setChangesFeatureFlags, changesFeaturesFlags } =

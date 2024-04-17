@@ -1,8 +1,8 @@
 import { TextField, Button, Snackbar, Typography, Paper } from '@mui/material'
 import styles from './integrations.module.css'
-import { useSelectedProjectContext } from '@/provider/SelectedProject'
 import ContentCopyIcon from '@mui/icons-material/ContentCopy'
 import React from 'react'
+import { useSelectedProjectContext } from '@/provider/Context'
 
 export const IntegrationsContent = () => {
   const { selectedProject } = useSelectedProjectContext()

@@ -1,8 +1,8 @@
-import { useFeatureFlagsContext } from '@/provider/FeatureFlags'
 import { FeatureFlagCard } from './FeatureFlagCard'
 import { LoadingContent } from '../LoadingContent'
 import styles from './featureFlags.module.css'
 import { NotData } from '../NotData'
+import { useFeatureFlagsContext } from '@/provider/Context'
 
 export const FeatureFlagList = () => {
   const { featureFlags } = useFeatureFlagsContext()
