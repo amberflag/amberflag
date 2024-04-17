@@ -1,0 +1,37 @@
+.root {
+  background-color: #fffda4;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  position: absolute;
+}
+
+.container {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.card {
+  height: min-content;
+}
+
+.loginButtons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  gap: 5px;
+}
+
+.button {
+  width: 100%;
+}
+
+.iologo {
+  margin-right: 10px;
+}

@@ -2,6 +2,7 @@ import Button from '@mui/material/Button'
 import Typography from '@mui/material/Typography'
 import EmojiPicker from 'emoji-picker-react'
 import React from 'react'
+import styles from './emojiSelector.module.css'
 
 export const EmojiSelector = ({
   selectEmoji,
@@ -24,9 +25,7 @@ export const EmojiSelector = ({
 
   return (
     <>
-      <Typography sx={{ marginTop: '1rem', marginBottom: '0.25rem' }}>
-        Select a Emoji
-      </Typography>
+      <Typography className={styles.title}>Select a Emoji</Typography>
       {openEmojiSelector && (
         <EmojiPicker
           onEmojiClick={event => {
@@ -36,18 +35,14 @@ export const EmojiSelector = ({
       )}
       {(!emojiSelected || !openEmojiSelector) && (
         <div
+          className={styles.emojiSelector}
           onClick={() => {
             setOpenEmojiSelector(true)
           }}
-          style={{
-            cursor: 'pointer',
-            display: 'flex',
-            justifyContent: 'center',
-            alignItems: 'center',
-            flexDirection: 'column'
-          }}
         >
-          <Typography style={{ fontSize: '275px' }}>{emojiSelected}</Typography>
+          <Typography className={styles.emojiSeletedText}>
+            {emojiSelected}
+          </Typography>
           <Button variant="text">Change emoji</Button>
         </div>
       )}

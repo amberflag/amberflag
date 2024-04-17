@@ -1,0 +1,16 @@
+.title {
+  margin-top: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.emojiSelector {
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.emojiSeletedText {
+  font-size: 275px;
+}

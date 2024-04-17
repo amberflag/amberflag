@@ -1,22 +1,16 @@
 import { useCreateEditProjectContext } from '@/provider/CreateEditProject'
 import Button from '@mui/material/Button'
 import React from 'react'
+import styles from './createEntity.module.css'
 
 export const CreateEntity = ({ title }: { title: string }) => {
   const { setOpenDialog } = useCreateEditProjectContext()
   return (
     <>
-      <div
-        style={{
-          width: '100%',
-          display: 'flex',
-          justifyContent: 'end',
-          marginBottom: '1rem'
-        }}
-      >
+      <div className={styles.createButtons}>
         <Button
+          className={styles.createButton}
           variant="text"
-          sx={{ paddingInline: '3rem', textDecoration: 'underline' }}
           onClick={() => {
             setOpenDialog(true)
           }}
