@@ -1,0 +1,11 @@
+.createButtons {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  margin-bottom: 1rem;
+}
+
+.reateButton {
+  padding-inline: 3rem;
+  text-decoration: underline;
+}

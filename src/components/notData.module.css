@@ -1,0 +1,12 @@
+.notData {
+  background-color: #f0f0f0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  flex-direction: column;
+}
+
+.notDataTitle {
+  color: #e5b700;
+}

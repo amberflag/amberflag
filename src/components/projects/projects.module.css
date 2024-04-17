@@ -1,3 +1,69 @@
+/*CreateEditProject.tsx*/
+
+.dialogTitle {
+  text-transform: uppercase !important;
+}
+
+.dialogContentText {
+  padding-top: 1rem !important;
+}
+
+.textField {
+  min-width: 350px !important;
+}
+
+/*ListProject.tsx*/
+
+.listProjects {
+  height: 650px;
+  overflow: auto;
+  background-color: #f6f6f6 !important;
+  border-radius: 5px !important;
+  padding: 0.5rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 10px !important;
+}
+
+/*ProjectCard.tsx*/
+
+.card {
+  border-radius: 10px !important;
+  min-height: 4.5rem;
+}
+
+.cardActivated {
+  background-color: white !important;
+}
+
+.cardDeactivated {
+  background-color: #e6e6e6a2 !important;
+}
+
+.cardContent {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+.title {
+  display: flex !important;
+  align-items: center !important;
+}
+
+.titleText {
+  margin-left: 10px !important;
+}
+
+.actions {
+  gap: 5px;
+  display: flex;
+}
+
+.button {
+  gap: 5px;
+}
+
 .actionsItem {
   padding: 1rem;
   display: flex !important;
