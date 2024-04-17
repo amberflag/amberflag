@@ -4,7 +4,7 @@ import React from 'react'
 import styles from './createEntity.module.css'
 
 export const CreateEntity = ({ title }: { title: string }) => {
-  const { setOpenDialogEntity } = useCreateEditProjectContext()
+  const { setOpenDialogCreateEditProject } = useCreateEditProjectContext()
   return (
     <>
       <div className={styles.createButtons}>
@@ -12,7 +12,7 @@ export const CreateEntity = ({ title }: { title: string }) => {
           className={styles.createButton}
           variant="text"
           onClick={() => {
-            setOpenDialogEntity(true)
+            setOpenDialogCreateEditProject(true)
           }}
         >
           create {title}
