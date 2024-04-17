@@ -9,7 +9,7 @@ export const FeatureFlagList = () => {
 
   return (
     <div className={styles.list}>
-      {!featureFlags.length && <NotData title="Feature flags" height="60vh" />}
+      {!featureFlags.length && <NotData title="Feature flags" />}
       {!!featureFlags.length &&
         featureFlags?.map((featureFlag: any) => (
           <FeatureFlagCard featureFlag={featureFlag} key={featureFlag.id} />

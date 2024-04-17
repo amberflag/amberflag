@@ -7,7 +7,7 @@ export const CreateEntity = ({ title }: { title: string }) => {
   const { setOpenDialogCreateEditProject } = useCreateEditProjectContext()
   return (
     <>
-      <div className={styles.createButtons}>
+      <div className={styles.createContainer}>
         <Button
           className={styles.createButton}
           variant="text"

@@ -19,27 +19,27 @@ export default function LoginPage() {
         <Card className={styles.card}>
           <CardHeader title="Amber Flag" />
           <CardContent>The app to management of feature flags</CardContent>
-          <div className={styles.loginButtons}>
+          <div className={styles.loginSSOContainer}>
             <Button
-              className={styles.button}
+              className={styles.loginButton}
               onClick={() => {
                 loginWithSSO('github')
               }}
               color="primary"
               variant="contained"
             >
-              <IoLogoGithub className={styles.iologo} />
+              <IoLogoGithub className={styles.loginLogo} />
               Continue with github
             </Button>
             <Button
-              className={styles.button}
+              className={styles.loginButton}
               onClick={() => {
                 loginWithSSO('gitlab')
               }}
               color="primary"
               variant="contained"
             >
-              <IoLogoGitlab className={styles.iologo} />
+              <IoLogoGitlab className={styles.loginButton} />
               Continue with gitlab
             </Button>
             <Button
@@ -50,7 +50,7 @@ export default function LoginPage() {
               color="primary"
               variant="contained"
             >
-              <IoLogoBitbucket className={styles.iologo} />
+              <IoLogoBitbucket className={styles.loginLogo} />
               Continue with bitbucket
             </Button>
           </div>
