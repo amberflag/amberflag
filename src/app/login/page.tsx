@@ -39,11 +39,11 @@ export default function LoginPage() {
               color="primary"
               variant="contained"
             >
-              <IoLogoGitlab className={styles.loginButton} />
+              <IoLogoGitlab className={styles.loginLogo} />
               Continue with gitlab
             </Button>
             <Button
-              className={styles.button}
+              className={styles.loginButton}
               onClick={() => {
                 loginWithSSO('bitbucket')
               }}
