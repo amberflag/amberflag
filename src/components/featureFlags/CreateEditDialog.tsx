@@ -89,10 +89,15 @@ export const CreateEditDialog = () => {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="error" variant="contained">
+        <Button onClick={handleClose} color="error" variant="text">
           Discard
         </Button>
-        <Button onClick={handlecreate} autoFocus disabled={!entity?.name}>
+        <Button
+          onClick={handlecreate}
+          autoFocus
+          disabled={!entity?.name}
+          variant="contained"
+        >
           {entity?.id ? 'Update' : 'Create'}
         </Button>
       </DialogActions>

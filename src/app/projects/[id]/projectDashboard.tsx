@@ -135,7 +135,9 @@ export const ProjectDashboard = ({ project, user, featureFlags }: any) => {
             <div className={styles.extra}>
               <NotData
                 title="Feature flags"
-                showActions={<CreateFlagsEnvsButtons />}
+                showActions={
+                  <>{selectedProject && <CreateFlagsEnvsButtons />}</>
+                }
               />
             </div>
           )}

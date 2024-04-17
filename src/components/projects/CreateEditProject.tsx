@@ -101,10 +101,10 @@ export const CreateEditProject = ({ title }: { title: string }) => {
         </DialogContentText>
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} color="error" variant="contained">
+        <Button onClick={handleClose} color="error" variant="text">
           Discard
         </Button>
-        <Button onClick={handlecreate} autoFocus disabled={!project?.name}>
+        <Button onClick={handlecreate} autoFocus disabled={!project?.name} variant="contained">
           {project?.id ? 'Update' : 'Create'}
         </Button>
       </DialogActions>
