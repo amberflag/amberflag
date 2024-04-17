@@ -11,6 +11,8 @@ import React from 'react'
 import { EmojiSelector } from '../EmojiSelector'
 import { createClient } from '@/utils/supabase/client'
 import { useRouter } from 'next/navigation'
+
+import styles from './projects.module.css'
 import { useCreateEditProjectContext, useUserContext } from '@/provider/Context'
 
 export const CreateEditProject = ({ title }: { title: string }) => {
@@ -74,23 +76,20 @@ export const CreateEditProject = ({ title }: { title: string }) => {
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description"
     >
-      <DialogTitle
-        id="alert-dialog-title"
-        style={{ textTransform: 'uppercase' }}
-      >
+      <DialogTitle className={styles.dialogTitle} id="alert-dialog-title">
         NEW {title}
       </DialogTitle>
       <DialogContent>
         <DialogContentText
+          className={styles.dialogContentText}
           id="alert-dialog-description"
-          sx={{ paddingTop: '1rem' }}
         >
           <TextField
+            className={styles.textField}
             id="outlined-basic"
             label="Select a Name"
             variant="outlined"
             required
-            sx={{ minWidth: '350px' }}
             onChange={event => {
               setProject?.({ ...project, name: event.target.value })
             }}

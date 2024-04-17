@@ -1,4 +1,5 @@
 import Typography from '@mui/material/Typography'
+import styles from './notData.module.css'
 
 export const NotData = ({
   title,
@@ -11,18 +12,13 @@ export const NotData = ({
 }) => {
   return (
     <div
+      className={styles.notData}
       style={{
-        backgroundColor: '#f0f0f0',
-        height: height || '80vh',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        borderRadius: '5px',
-        flexDirection: 'column'
+        height: height || '80vh'
       }}
     >
       <Typography variant="body2">
-        There are not <span style={{ color: '#e5b700' }}>{title}</span> yet.
+        There are not <span className={styles.title}>{title}</span> yet.
       </Typography>
       {showActions && showActions}
     </div>

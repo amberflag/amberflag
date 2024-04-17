@@ -10,6 +10,7 @@ import {
 import { useRouter } from 'next/navigation'
 import { useMemo } from 'react'
 import ArrowBackIcon from '@mui/icons-material/ArrowBack'
+import styles from './appBar.module.css'
 import { useUserContext } from '@/provider/Context'
 
 export const AppBar = ({
@@ -25,22 +26,14 @@ export const AppBar = ({
   const Bar = useMemo(
     () => (
       <AppBarMui
+        className={`${styles.appBar} ${user?.user_metadata?.avatar_url && styles.userWithAvatar}`}
         position="static"
-        sx={{
-          minWidth: '400px',
-          borderTopRightRadius: user?.user_metadata?.avatar_url
-            ? '5rem'
-            : undefined,
-          borderBottomRightRadius: user?.user_metadata?.avatar_url
-            ? '5rem'
-            : undefined
-        }}
       >
         <Toolbar variant="dense">
           {showBack && (
             <ArrowBackIcon
+              className={styles.arrowBackIcon}
               fontSize="large"
-              sx={{ marginRight: '1rem', cursor: 'pointer' }}
               onClick={() => {
                 router.back()
               }}
@@ -57,14 +50,7 @@ export const AppBar = ({
                {' ' + subtitle}
             </Typography>
           )}
-          <div
-            style={{
-              position: 'absolute',
-              right: '5px',
-              display: 'flex',
-              gap: '10px'
-            }}
-          >
+          <div className={styles.logoutButtons}>
             <Button
               color="secondary"
               onClick={() => {
@@ -81,7 +67,7 @@ export const AppBar = ({
         </Toolbar>
       </AppBarMui>
     ),
-    [user, router, showBack]
+    [user, router, showBack, subtitle]
   )
   return Bar
 }

@@ -46,36 +46,27 @@ export const ProjectCard = ({
   return (
     <>
       <Card
+        className={`${styles.card} ${project?.isCardActivated ? styles.cardActivated : styles.cardDeactivated}`}
         key={key}
-        sx={{
-          borderRadius: '10px',
-          backgroundColor: project?.isActivated ? 'white' : '#e6e6e6a2'
-        }}
       >
-        <CardContent
-          sx={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between'
-          }}
-        >
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+        <CardContent className={styles.cardContent}>
+          <div className={styles.title}>
             <Typography variant="h4">{project?.emoji}</Typography>
-            <Typography variant="body1" sx={{ marginLeft: '10px' }}>
+            <Typography className={styles.titleText} variant="body1">
               {project?.name}
             </Typography>
           </div>
 
-          <div style={{ gap: '5px', display: 'flex' }}>
+          <div className={styles.actions}>
             {project?.isActivated && (
               <>
                 <Button
+                  className={styles.button}
                   onClick={() => {
                     router.push(`/projects/${project?.uuid}`)
                   }}
                   variant="outlined"
                   disabled={!project?.isActivated}
-                  sx={{ gap: '5px' }}
                 >
                   Feature flags
                   <KeyboardDoubleArrowRightIcon />

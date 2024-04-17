@@ -5,6 +5,7 @@ import {
   useCreateEditProjectContext,
   useProjectsContext
 } from '@/provider/Context'
+import styles from './projects.module.css'
 
 export const ListProjects = () => {
   const { projects } = useProjectsContext()
@@ -13,17 +14,7 @@ export const ListProjects = () => {
 
   const ListProjects = useMemo(
     () => (
-      <div
-        style={{
-          height: '650px',
-          backgroundColor: '#f6f6f6',
-          borderRadius: '5px',
-          padding: '0.5rem',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '10px'
-        }}
-      >
+      <div className={styles.listProjects}>
         {!projects.length && <LoadingContent />}
         {!!projects.length &&
           projects?.map((project: any) => (
