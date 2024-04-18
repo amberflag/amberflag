@@ -126,6 +126,7 @@ export const ProjectDashboard = ({
                 >
                   <InputLabel htmlFor="search-feature-flag">Search</InputLabel>
                   <OutlinedInput
+                    style={{ minWidth: '150px', whiteSpace: 'nowrap' }}
                     onChange={debounce(
                       (event: any) => search(event.target.value),
                       500
