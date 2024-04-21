@@ -61,7 +61,7 @@ export const IntegrationsContent = () => {
       <Typography variant="h5"> How to integrate with curl?</Typography>
       <Paper className={styles.integrationBox}>
         <Typography variant="body1">
-          {`curl --location 'https://jzrvzjdnwjnybpeyazyw.supabase.co/functions/v1/feature-flags-list' \ `}
+          {`curl --location 'https://amberflag-server.onrender.com' \ `}
         </Typography>
         <Typography variant="body1">
           {`--header 'Content-Type: application/json' \ `}
