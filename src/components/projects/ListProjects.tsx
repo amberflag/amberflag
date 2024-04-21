@@ -16,7 +16,6 @@ export const ListProjects = () => {
   const ListProjects = useMemo(
     () => (
       <div className={styles.listProjects}>
-        {!projects?.length && <LoadingContent />}
         {!!projects?.length &&
           projects?.map((project: Project) => (
             <ProjectCard
