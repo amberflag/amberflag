@@ -6,9 +6,7 @@ import {
   useSelectedProjectContext
 } from '@/provider/Context'
 import { Typography, Button, IconButton, Menu, MenuItem } from '@mui/material'
-import { useRouter } from 'next/navigation'
 import React from 'react'
-import { createClient } from '@/utils/supabase/client'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
 
 export const CreateFlagsEnvsButtons = ({ showButtons = false }) => {
@@ -16,18 +14,15 @@ export const CreateFlagsEnvsButtons = ({ showButtons = false }) => {
     useCreateEditEnvironmentOrFlagContext()
   const { selectedProject } = useSelectedProjectContext()
   const { featureFlags } = useFeatureFlagsContext()
-
-  const router = useRouter()
-
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null)
   const openMenuAction = Boolean(anchorEl)
+
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget)
   }
   const handleClose = () => {
     setAnchorEl(null)
   }
-  const supabaseClient = createClient()
 
   return (
     <div
@@ -93,6 +88,7 @@ export const CreateFlagsEnvsButtons = ({ showButtons = false }) => {
         <MenuItem
           className={styles.actionsItem}
           onClick={() => {
+            setAnchorEl(null)
             setOpenDialogEntity?.(true)
             setEntity?.({
               ...entity,
@@ -108,6 +104,7 @@ export const CreateFlagsEnvsButtons = ({ showButtons = false }) => {
           color="error"
           className={styles.actionsItem}
           onClick={() => {
+            setAnchorEl(null)
             setOpenDialogEntity?.(true)
             setEntity?.({
               ...entity,
