@@ -12,5 +12,5 @@
 }
 
 .emojiSeletedText {
-  font-size: 275px;
+  font-size: 275px !important;
 }
