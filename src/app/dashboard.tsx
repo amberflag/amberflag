@@ -37,8 +37,11 @@ export const Dashboard = ({
         }}
       >
         <CreateEntity title="project" />
-        {!projects && <NotData title="Projects" />}
-        {!!projects && <ListProjects />}
+        {!projects || !projects?.length ? (
+          <NotData title="Projects" />
+        ) : (
+          <ListProjects />
+        )}
       </div>
 
       <CreateEditProject title="project" />
