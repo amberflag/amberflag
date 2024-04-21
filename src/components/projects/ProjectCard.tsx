@@ -72,18 +72,17 @@ export const ProjectCard = ({
                   Feature flags
                   <KeyboardDoubleArrowRightIcon />
                 </Button>
-                {project?.isAdmin && (
-                  <IconButton
-                    onClick={handleClick}
-                    aria-controls={
-                      openMenuAction ? 'actions-project-card' : undefined
-                    }
-                    aria-haspopup="true"
-                    aria-expanded={openMenuAction ? 'true' : undefined}
-                  >
-                    <MoreVertIcon />
-                  </IconButton>
-                )}
+                <IconButton
+                  onClick={handleClick}
+                  aria-controls={
+                    openMenuAction ? 'actions-project-card' : undefined
+                  }
+                  aria-haspopup="true"
+                  aria-expanded={openMenuAction ? 'true' : undefined}
+                  disabled={!project?.isAdmin}
+                >
+                  <MoreVertIcon />
+                </IconButton>
               </>
             )}
             {!project?.isActivated && (
